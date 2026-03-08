@@ -15,8 +15,8 @@ import { useEffect, useState, useRef } from "react";
 ───────────────────────────────────────────── */
 const ROLES = ["Full-Stack Developer", "AI / ML Engineer", "Creative Builder"];
 const STATS = [
-  { value: "3+", label: "Years Exp." },
-  { value: "20+", label: "Projects" },
+  { value: "1", label: "Year Exp." },
+  { value: "6", label: "Projects" },
   { value: "10+", label: "Tech Stacks" },
 ];
 const TICKER_ITEMS = [

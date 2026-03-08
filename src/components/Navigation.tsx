@@ -142,20 +142,19 @@ export default function Navigation() {
           >
             {/* Logo mark */}
             <div style={{
-              width: "28px", height: "28px",
-              border: "1.5px solid rgba(37,99,235,0.6)",
-              borderRadius: "4px",
+              width: "32px", height: "32px",
+              border: "1.5px solid rgba(37,99,235,0.4)",
+              borderRadius: "6px",
               display: "flex", alignItems: "center", justifyContent: "center",
-              background: "rgba(37,99,235,0.08)",
+              background: "rgba(37,99,235,0.05)",
               flexShrink: 0,
+              overflow: "hidden", // added to contain the image
             }}>
-              <span style={{
-                fontSize: "0.68rem", fontWeight: 700,
-                color: "#2563eb",
-                fontFamily: "'Outfit', sans-serif",
-                letterSpacing: "-0.02em",
-                lineHeight: 1,
-              }}>JB</span>
+              <img 
+                src="/logo.jpg" 
+                alt="Jophin Babu Logo" 
+                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+              />
             </div>
             <span style={{
               fontSize: "0.72rem", fontWeight: 600,

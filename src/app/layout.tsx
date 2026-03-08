@@ -9,6 +9,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Jophin Babu | Portfolio",
   description: "Minimalist portfolio of Jophin Babu, Software Developer.",
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
 };
 
 export default function RootLayout({

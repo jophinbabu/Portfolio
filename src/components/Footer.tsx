@@ -30,7 +30,7 @@ export default function Footer() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(15,23,42,0.1)', paddingTop: '2rem', fontSize: '0.9rem', color: '#64748b', flexWrap: 'wrap', gap: '1rem' }}>
           <p>© {new Date().getFullYear()} Jophin Babu</p>
-          <p>Designed & Developed with Next.js</p>
+          <p>Built for Performance & Design</p>
         </div>
       </div>
     </footer>

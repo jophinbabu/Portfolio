@@ -65,8 +65,8 @@ export default function Home() {
             <AnimateInView yOffset={30} delay={0.15}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', paddingTop: '0.5rem' }}>
                 {[
-                  { value: '3+', label: 'Years of Experience' },
-                  { value: '10+', label: 'Projects Delivered' },
+                  { value: '1', label: 'Year of Experience' },
+                  { value: '6', label: 'Projects Delivered' },
                   { value: '4', label: 'Domains Explored' },
                   { value: '∞', label: 'Curiosity Level' },
                 ].map((stat, i) => (
@@ -209,7 +209,7 @@ export default function Home() {
                   "/roadguard-3.png"
                 ]}
                 link="http://3.6.94.162:8000/"
-                year="2024"
+                year="2026"
               />
             </AnimateInView>
             <AnimateInView yOffset={60}>
@@ -219,7 +219,7 @@ export default function Home() {
                 description="A quantitative trading system for the Indian stock market. Built with a custom Confidence Threshold Optimizer and a LightGBM model trained on 33 technical indicators."
                 imageSrc="/tata-trading.png"
                 link="https://tatasteel-ai-prediciton-model.vercel.app"
-                year="2023"
+                year="2026"
               />
             </AnimateInView>
             <AnimateInView yOffset={60}>
@@ -227,7 +227,7 @@ export default function Home() {
                 title="Automatic Exam Seating System"
                 category="React, Node.js, MongoDB"
                 description="An automated seating arrangement system that handles complex scheduling constraints for exams. Reduced planning time from days to minutes using constraint-based algorithms — eliminating the manual effort typically involved in organizing large-scale exam halls."
-                year="2023"
+                year="2024"
               />
             </AnimateInView>
             <AnimateInView yOffset={60}>
@@ -236,7 +236,7 @@ export default function Home() {
                 category="Python, Random Forest"
                 description="A machine learning-powered financial tool that forecasts an organisation's budget for the next quarter. Built around a Random Forest model, it analyzes historical financial data to deliver accurate, data-driven budget predictions — helping organisations plan smarter and reduce financial uncertainty."
                 link="https://github.com"
-                year="2024"
+                year="2025"
               />
             </AnimateInView>
             <AnimateInView yOffset={60}>
@@ -250,7 +250,7 @@ export default function Home() {
                   "/bigchat-3.png"
                 ]}
                 link="https://bigchat-frontend.vercel.app"
-                year="2023"
+                year="2026"
               />
             </AnimateInView>
           </div>
