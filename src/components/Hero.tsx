@@ -219,6 +219,12 @@ export default function Hero() {
           flex-shrink: 0;
         }
         .s-link:hover .s-link-bar { width: 30px; }
+
+        @media (max-width: 1024px) {
+          .side-label {
+            display: none !important;
+          }
+        }
       `}</style>
 
       <AmbientGlow />
@@ -374,6 +380,7 @@ export default function Hero() {
         ].map(({ side, text, rotate }) => (
           <motion.div
             key={side}
+            className="side-label"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.9, duration: 1 }}

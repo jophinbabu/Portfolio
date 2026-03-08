@@ -41,11 +41,19 @@ export default function ProjectCard({ title, category, description, imageSrc, li
   return (
     <CardContainer 
       {...containerProps}
-      className={`project-card ${link ? 'hoverable-link' : ''}`} 
+      className={`project-card p-6 md:p-10`} 
       style={{ 
         display: 'grid', 
         gridTemplateColumns: hasImages ? 'minmax(300px, 1fr) minmax(300px, 1fr)' : '1fr', 
-        gap: '4rem', textDecoration: 'none', color: 'inherit', paddingBottom: '6rem', position: 'relative' 
+        gap: '4rem', 
+        textDecoration: 'none', 
+        color: 'inherit', 
+        position: 'relative',
+        border: `1px solid ${isHovered ? 'var(--accent)' : 'var(--border)'}`,
+        background: 'rgba(15,23,42,0.02)',
+        borderRadius: '16px',
+        transition: 'border-color 0.4s ease, transform 0.4s ease',
+        transform: isHovered ? 'translateY(-4px)' : 'translateY(0)',
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -54,9 +62,9 @@ export default function ProjectCard({ title, category, description, imageSrc, li
         <div 
         style={{ 
           width: '100%', 
-          height: '65vh', 
+          height: '60vh', 
           minHeight: '400px', 
-          borderRadius: '30px', 
+          borderRadius: '12px', 
           overflow: 'hidden', 
           backgroundColor: '#e2e8f0', 
           position: 'relative',
@@ -69,7 +77,7 @@ export default function ProjectCard({ title, category, description, imageSrc, li
             alt={`${title} - image ${index + 1}`} 
             initial={{ opacity: 0 }}
             animate={{ 
-              opacity: currentImgIndex === index ? 0.9 : 0,
+              opacity: currentImgIndex === index ? 1 : 0,
               scale: isHovered ? 1.05 : 1
             }}
             transition={{ 
@@ -95,40 +103,81 @@ export default function ProjectCard({ title, category, description, imageSrc, li
       </div>
       )}
       
-      <div style={{ display: 'flex', flexDirection: 'column', paddingTop: hasImages ? '2rem' : '0' }}>
-        <p style={{ fontFamily: 'monospace', fontSize: '1.2rem', marginBottom: '3rem', color: '#64748b' }}>( {year} )</p>
+      <div style={{ display: 'flex', flexDirection: 'column', paddingTop: hasImages ? '1.5rem' : '0' }}>
+        <p style={{ 
+          fontFamily: "'DM Mono', monospace", 
+          fontSize: '0.65rem', 
+          fontWeight: 600,
+          letterSpacing: '0.15em', 
+          marginBottom: '2rem', 
+          color: 'var(--fg3)',
+          textTransform: 'uppercase'
+        }}>
+          ( {year} )
+        </p>
         
-        <h3 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '3rem', fontWeight: 800, lineHeight: 1.1, color: 'var(--section-dark-fg)' }}>
+        <h3 style={{ 
+          fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', 
+          marginBottom: '2rem', 
+          fontWeight: 800, 
+          lineHeight: 1.1, 
+          color: 'var(--fg)',
+          fontFamily: "'Outfit', sans-serif",
+          letterSpacing: '-0.03em'
+        }}>
           {title}
         </h3>
         
-        <p style={{ color: '#475569', fontSize: '1.2rem', maxWidth: '400px', lineHeight: 1.6, marginBottom: 'auto' }}>
+        <p style={{ 
+          color: 'var(--fg2)', 
+          fontSize: '1.05rem', 
+          maxWidth: '480px', 
+          lineHeight: 1.6, 
+          marginBottom: 'auto',
+          fontWeight: 400
+        }}>
           {description}
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(15,23,42,0.1)', paddingTop: '2rem', marginTop: '4rem' }}>
-           <span style={{ textTransform: 'uppercase', letterSpacing: '0.05em', fontSize: '0.9rem', color: '#64748b' }}>{category}</span>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center', 
+          borderTop: '1px solid var(--border)', 
+          paddingTop: '2rem', 
+          marginTop: '3rem' 
+        }}>
+           <span style={{ 
+             textTransform: 'uppercase', 
+             letterSpacing: '0.15em', 
+             fontSize: '0.65rem', 
+             fontWeight: 600,
+             color: 'var(--fg3)',
+             fontFamily: "'DM Mono', monospace"
+           }}>
+             {category}
+           </span>
            {link && (
              <motion.div 
-                animate={{ x: isHovered ? 5 : 0, y: isHovered ? -5 : 0, color: isHovered ? 'var(--accent)' : '#0f172a' }}
+                animate={{ 
+                  x: isHovered ? 4 : 0, 
+                  y: isHovered ? -4 : 0, 
+                  color: isHovered ? 'var(--accent)' : 'var(--fg2)' 
+                }}
                 transition={{ duration: 0.3 }}
              >
-                <ArrowUpRight size={32} />
+                <ArrowUpRight size={28} />
              </motion.div>
            )}
         </div>
       </div>
       
-      {/* CSS for responsive grid inside the component style block is skipped, handled by global grid-2 later or media queries */}
       <style jsx>{`
         @media (max-width: 1024px) {
           .project-card {
             grid-template-columns: 1fr !important;
             gap: 2rem !important;
           }
-        }
-        .hoverable-link {
-          cursor: pointer;
         }
       `}</style>
     </CardContainer>

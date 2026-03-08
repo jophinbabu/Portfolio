@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
-
 :root {
   --background: #ffffff; /* Pure white */
   --foreground: #0f172a; /* Slate 900 */
@@ -25,6 +23,67 @@ html, body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Hide default cursor on desktop when using custom cursor */
+  cursor: none;
+}
+
+/* Ensure links and interactive elements also hide default cursor */
+a, button, input, textarea, select {
+  cursor: none !important;
+}
+
+/* Custom Cursor Styles */
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.custom-cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Subtle Film Grain / Noise Overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200vw;
+  height: 200vh;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  opacity: 0.035;
+  /* Animate noise slightly so it feels like real film grain */
+  animation: noise-move 0.2s infinite steps(2);
+}
+
+@keyframes noise-move {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 15%); }
+  80% { transform: translate(3%, 3%); }
+  90% { transform: translate(-10%, 10%); }
+  100% { transform: translate(0, 0); }
 }
 
 a {
@@ -196,14 +255,14 @@ section {
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0;
+  opacity: 0.85; /* always glowing */
   transition: opacity 0.4s ease;
   animation: glow-rotate 4s linear infinite;
   z-index: 1;
 }
 
 .glow-card--active .glow-card__border {
-  opacity: 1;
+  opacity: 1; /* full glow on active */
 }
 
 /* Inner spotlight glow that follows cursor */
@@ -216,7 +275,7 @@ section {
     color-mix(in srgb, var(--glow-color) 40%, transparent) 0%,
     transparent 65%
   );
-  opacity: 0;
+  opacity: 0.15; /* subtle inner glow always */
   transition: opacity 0.4s ease;
   z-index: 1;
   pointer-events: none;
@@ -256,8 +315,42 @@ section {
   to   { --glow-angle: 360deg; }
 }
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
 @property --glow-angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
+}
+
+/* ─── Form Inputs ─── */
+.form-input {
+  width: 100%;
+  padding: 1.2rem;
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: var(--fg3);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background: rgba(37, 99, 235, 0.02);
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
 }

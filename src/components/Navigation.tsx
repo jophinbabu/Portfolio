@@ -108,6 +108,12 @@ export default function Navigation() {
           font-family: 'DM Mono', monospace;
           letter-spacing: 0.1em;
         }
+
+        @media (max-width: 768px) {
+          .desktop-nav { display: none !important; }
+          .desktop-cta { display: none !important; }
+          .mobile-menu-btn { display: flex !important; }
+        }
       `}</style>
 
       <motion.header
@@ -194,12 +200,13 @@ export default function Navigation() {
           }} />
 
           {/* CTA — desktop */}
-          <Link href="#contact" className="nav-cta">
+          <Link href="#contact" className="nav-cta desktop-cta">
             Let's Talk
           </Link>
 
           {/* Hamburger — mobile */}
           <button
+            className="mobile-menu-btn"
             onClick={() => setMenuOpen((p) => !p)}
             aria-label="Toggle menu"
             style={{

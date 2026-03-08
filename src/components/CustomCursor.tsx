@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHoveringImage, setIsHoveringImage] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
@@ -14,10 +14,18 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (target.closest("a") || target.closest("button") || target.closest(".project-image-wrap")) {
-        setIsHoveringImage(true);
+      // Check if hovering over clickable elements or elements with the 'data-cursor-hover' attribute
+      if (
+        window.getComputedStyle(target).cursor === "pointer" ||
+        target.tagName.toLowerCase() === "a" ||
+        target.tagName.toLowerCase() === "button" ||
+        target.closest("a") ||
+        target.closest("button") ||
+        target.hasAttribute("data-cursor-hover")
+      ) {
+        setIsHovering(true);
       } else {
-        setIsHoveringImage(false);
+        setIsHovering(false);
       }
     };
 
@@ -30,37 +38,50 @@ export default function CustomCursor() {
     };
   }, []);
 
+  // Hide the custom cursor on smaller screens for better performance and usability
+  const [isVisible, setIsVisible] = useState(false);
+  useEffect(() => {
+    setIsVisible(window.innerWidth > 768);
+    const handleResize = () => setIsVisible(window.innerWidth > 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  if (!isVisible) return null;
+
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: `
-        * { cursor: none !important; }
-        .nav-corner a, .btn { cursor: none !important; }
-      `}} />
+      {/* Main tiny dot that follows cursor exactly */}
       <motion.div
+        className="custom-cursor-dot"
         animate={{
-          x: mousePosition.x - (isHoveringImage ? 24 : 8),
-          y: mousePosition.y - (isHoveringImage ? 24 : 8),
-          scale: isHoveringImage ? 2 : 1,
-          opacity: 1
+          x: mousePosition.x - 4, // Center the 8px dot
+          y: mousePosition.y - 4,
+          scale: isHovering ? 0 : 1, // Disappear when hovering to let the outline take over
+          opacity: 1,
+        }}
+        transition={{
+          type: "tween",
+          ease: "linear",
+          duration: 0, // 0 duration for instant follow
+        }}
+      />
+      
+      {/* Larger outline that lags slightly behind */}
+      <motion.div
+        className="custom-cursor-outline"
+        animate={{
+          x: mousePosition.x - 20, // Center the 40px outline
+          y: mousePosition.y - 20,
+          scale: isHovering ? 1.5 : 1,
+          backgroundColor: isHovering ? "rgba(37, 99, 235, 0.1)" : "transparent", // Accent color with low opacity
+          borderColor: isHovering ? "transparent" : "var(--accent)",
         }}
         transition={{
           type: "spring",
           stiffness: 150,
           damping: 15,
-          mass: 0.1
-        }}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: isHoveringImage ? "48px" : "16px",
-          height: isHoveringImage ? "48px" : "16px",
-          backgroundColor: isHoveringImage ? "rgba(255, 77, 0, 0.4)" : "var(--foreground)",
-          border: isHoveringImage ? "1px solid var(--accent)" : "none",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          zIndex: 9999,
-          mixBlendMode: isHoveringImage ? "normal" : "difference"
+          mass: 0.5,
         }}
       />
     </>

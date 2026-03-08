@@ -36,10 +36,29 @@ export default function Home() {
               margin-bottom: 0;
               max-width: 1200px;
             }
+            .intro-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 6rem;
+              margin-top: 6rem;
+            }
+            .stats-grid {
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 3rem;
+              padding-top: 0.5rem;
+            }
+            @media (max-width: 1024px) {
+              .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                margin-top: 4rem;
+              }
+            }
           `}</style>
 
           {/* Two-column detail area */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6rem', marginTop: '6rem' }}>
+          <div className="intro-grid">
             {/* Left column — description with accent border */}
             <AnimateInView yOffset={30}>
               <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '2rem' }}>
@@ -63,7 +82,7 @@ export default function Home() {
 
             {/* Right column — stats grid */}
             <AnimateInView yOffset={30} delay={0.15}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', paddingTop: '0.5rem' }}>
+              <div className="stats-grid">
                 {[
                   { value: '1', label: 'Year of Experience' },
                   { value: '6', label: 'Projects Delivered' },
@@ -175,10 +194,69 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" style={{ backgroundColor: 'var(--section-dark-bg)', color: 'var(--section-dark-fg)', padding: '10rem 0' }}>
-        <div className="container">
+      <section id="projects" style={{ 
+        backgroundColor: 'var(--background)', 
+        color: 'var(--fg)', 
+        padding: '10rem 0',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* ─ Dot Grid Pattern ─ */}
+        <div
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(rgba(15,23,42,0.06) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            zIndex: 0, pointerEvents: "none",
+          }}
+        />
+
+        {/* ─ Radial glow ─ */}
+        <div
+          style={{
+            position: "absolute",
+            top: "20%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "clamp(400px, 60vw, 800px)",
+            height: "clamp(400px, 60vw, 800px)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 65%)",
+            filter: "blur(60px)",
+            zIndex: 0, pointerEvents: "none",
+          }}
+        />
+
+        {/* ─ Vertical Grid lines ─ */}
+        {[16.66, 33.33, 50, 66.66, 83.33].map((p, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${p}%`,
+              top: 0, bottom: 0,
+              width: "1px",
+              background: "rgba(15,23,42,0.03)",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+        ))}
+
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <AnimateInView yOffset={40}>
-             <p className="section-label" style={{ marginBottom: '6rem' }}><span>//</span> Projects</p>
+             <p style={{ 
+               marginBottom: '6rem',
+               fontSize: '0.65rem', 
+               fontWeight: 600,
+               letterSpacing: '0.15em', 
+               color: 'var(--fg3)',
+               textTransform: 'uppercase',
+               fontFamily: "'DM Mono', monospace",
+               display: 'flex',
+               alignItems: 'center',
+               gap: '0.75rem'
+             }}>
+               <span style={{ color: 'var(--accent)' }}>//</span> Projects
+             </p>
           </AnimateInView>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem' }}>
