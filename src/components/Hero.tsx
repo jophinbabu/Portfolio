@@ -116,6 +116,104 @@ function Ticker() {
 }
 
 /* ─────────────────────────────────────────────
+   HERO GEOMETRY (CIRCLES)
+───────────────────────────────────────────── */
+function HeroGeometry({ x, y }: { x: any; y: any }) {
+  const rotate1 = useTransform(x, [0, 1], [-20, 20]);
+  const rotate2 = useTransform(y, [0, 1], [20, -20]);
+  const rotate3 = useTransform(x, [0, 1], [-40, 40]);
+
+  return (
+    <motion.div
+      style={{
+        position: "absolute",
+        top: "44%",
+        left: "50%",
+        x: "-50%",
+        y: "-50%",
+        width: "clamp(450px, 75vw, 1100px)",
+        height: "clamp(450px, 75vw, 1100px)",
+        zIndex: 0,
+        pointerEvents: "none",
+        opacity: 0.35,
+      }}
+    >
+      <svg viewBox="0 0 200 200" style={{ width: "100%", height: "100%", overflow: "visible" }}>
+        {/* Outer dashed ring - Large */}
+        <motion.circle
+          cx="100"
+          cy="100"
+          r="98"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="0.3"
+          strokeDasharray="2 12"
+          style={{ rotate: rotate3, originX: "100px", originY: "100px" }}
+        />
+        
+        {/* Main dashed ring */}
+        <motion.circle
+          cx="100"
+          cy="100"
+          r="88"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="0.6"
+          strokeDasharray="4 8"
+          style={{ rotate: rotate1, originX: "100px", originY: "100px" }}
+        />
+
+        {/* Technical ticks ring */}
+        <motion.circle
+          cx="100"
+          cy="100"
+          r="82"
+          fill="none"
+          stroke="var(--accent2)"
+          strokeWidth="1.5"
+          strokeDasharray="0.5 19.5"
+          style={{ rotate: rotate2, originX: "100px", originY: "100px" }}
+        />
+
+        {/* Inner solid thin ring */}
+        <motion.circle
+          cx="100"
+          cy="100"
+          r="72"
+          fill="none"
+          stroke="var(--accent2)"
+          strokeWidth="0.15"
+          opacity="0.4"
+        />
+
+        {/* Scanning pulsing ring */}
+        <motion.circle
+          cx="100"
+          cy="100"
+          r="92"
+          fill="none"
+          stroke="var(--accent)"
+          strokeWidth="0.8"
+          strokeDasharray="1 30"
+          opacity="0.6"
+          animate={{ strokeDashoffset: [0, 200] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+
+        {/* Center focus bracket - Top Left */}
+        <path d="M 85 85 L 80 85 L 80 80" fill="none" stroke="var(--accent)" strokeWidth="0.5" opacity="0.6" />
+        {/* Center focus bracket - Top Right */}
+        <path d="M 115 85 L 120 85 L 120 80" fill="none" stroke="var(--accent)" strokeWidth="0.5" opacity="0.6" />
+        {/* Center focus bracket - Bottom Left */}
+        <path d="M 85 115 L 80 115 L 80 120" fill="none" stroke="var(--accent)" strokeWidth="0.5" opacity="0.6" />
+        {/* Center focus bracket - Bottom Right */}
+        <path d="M 115 115 L 120 115 L 120 120" fill="none" stroke="var(--accent)" strokeWidth="0.5" opacity="0.6" />
+      </svg>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────
    MAIN
 ───────────────────────────────────────────── */
 export default function Hero() {
@@ -123,21 +221,31 @@ export default function Hero() {
   const yParallax = useTransform(scrollY, [0, 600], [0, 110]);
   const fadeOut = useTransform(scrollY, [0, 420], [1, 0]);
   const sectionRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [roleIdx, setRoleIdx] = useState(0);
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const x = useSpring(mx, { stiffness: 50, damping: 25 });
+  const y = useSpring(my, { stiffness: 50, damping: 25 });
 
   useEffect(() => {
     const iv = setInterval(() => setRoleIdx((p) => (p + 1) % ROLES.length), 3400);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
     return () => clearInterval(iv);
   }, []);
 
   const letterV = {
-    hidden: { y: "105%", opacity: 0 },
+    hidden: { y: "110%", opacity: 0, scale: 0.8, rotate: 5 },
     show: (i: number) => ({
       y: "0%",
       opacity: 1,
+      scale: 1,
+      rotate: 0,
       transition: {
         delay: 0.45 + i * 0.055,
-        duration: 0.85,
+        duration: 0.9,
         ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
       },
     }),
@@ -241,10 +349,18 @@ export default function Hero() {
           justifyContent: "center",
           background: "var(--bg)",
         }}
+        onMouseMove={(e) => {
+          const rect = sectionRef.current?.getBoundingClientRect();
+          if (rect) {
+            mx.set((e.clientX - rect.left) / rect.width);
+            my.set((e.clientY - rect.top) / rect.height);
+          }
+        }}
       >
 
         {/* ─ Background Video ─ */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
@@ -255,10 +371,10 @@ export default function Hero() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            opacity: 0.15,
+            opacity: 0.12,
             zIndex: 0,
             pointerEvents: "none",
-            mixBlendMode: "luminosity",
+            filter: "grayscale(100%)",
           }}
         >
           <source src="/hero-bg.mp4" type="video/mp4" />
@@ -417,6 +533,9 @@ export default function Hero() {
         >
 
 
+
+          {/* ── Geometry ── */}
+          <HeroGeometry x={mx} y={my} />
 
           {/* ── Name block ── */}
           <div style={{ textAlign: "center", position: "relative" }}>
