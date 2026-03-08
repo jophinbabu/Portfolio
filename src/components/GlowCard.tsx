@@ -68,6 +68,7 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
         height: "100%",
         perspective: "1200px",
       }}
+      className="gc-outer-wrapper"
     >
       <style>{`
         @keyframes glowFloat {
@@ -166,17 +167,30 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
         }
 
         @media (pointer: coarse), (max-width: 768px) {
-          .gc-body {
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
-            background: #ffffff;
+          .gc-outer-wrapper {
+            animation: none !important;
+            perspective: none !important;
           }
-          .gc-wrap::before, .gc-border, .gc-particle {
-            animation-duration: 5s !important; /* Slow down for mobile CPU */
-          }
-           .gc-wrap {
+          .gc-wrap {
             transform: none !important;
             transition: none !important;
+            will-change: auto !important;
+          }
+          .gc-wrap::before {
+            display: none !important;
+          }
+          .gc-border {
+            animation: none !important;
+            background: var(--glow-color) !important;
+            padding: 1px !important;
+          }
+          .gc-body {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background: #ffffff !important;
+          }
+          .gc-particle, .gc-shimmer, .gc-spotlight {
+            display: none !important;
           }
         }
 
