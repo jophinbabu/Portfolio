@@ -131,9 +131,8 @@ function HeroGeometry({ x, y }: { x: any; y: any }) {
         left: "50%",
         x: "-50%",
         y: "-50%",
-        marginTop: "0.2em", // Slight visual adjustment to center on name block
-        width: "clamp(280px, 85vw, 1100px)",
-        height: "clamp(280px, 85vw, 1100px)",
+        width: "clamp(350px, 92vw, 1100px)",
+        height: "clamp(350px, 92vw, 1100px)",
         zIndex: 0,
         pointerEvents: "none",
         opacity: 0.35,
