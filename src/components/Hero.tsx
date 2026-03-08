@@ -127,12 +127,12 @@ function HeroGeometry({ x, y }: { x: any; y: any }) {
     <motion.div
       style={{
         position: "absolute",
-        top: "44%",
+        top: "50%",
         left: "50%",
         x: "-50%",
         y: "-50%",
-        width: "clamp(450px, 75vw, 1100px)",
-        height: "clamp(450px, 75vw, 1100px)",
+        width: "clamp(280px, 85vw, 1100px)",
+        height: "clamp(280px, 85vw, 1100px)",
         zIndex: 0,
         pointerEvents: "none",
         opacity: 0.35,
@@ -307,6 +307,16 @@ export default function Hero() {
         .btn-ghost:hover {
           border-color: rgba(37,99,235,0.38);
           color: var(--fg);
+        }
+
+        @media (max-width: 640px) {
+          .btn-primary, .btn-ghost {
+            width: 100%;
+            justify-content: center;
+            padding: 0.82rem 1.8rem;
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+          }
         }
 
         /* ── Social links ── */
@@ -553,7 +563,7 @@ export default function Hero() {
                   animate="show"
                   variants={letterV}
                   style={{
-                    fontSize: "clamp(4.2rem, 12.5vw, 14rem)",
+                    fontSize: "clamp(3rem, 12.5vw, 14rem)",
                     fontWeight: 900,
                     letterSpacing: "-0.03em",
                     color: "var(--fg)",
@@ -595,7 +605,7 @@ export default function Hero() {
                   animate="show"
                   variants={letterV}
                   style={{
-                    fontSize: "clamp(4.2rem, 12.5vw, 14rem)",
+                    fontSize: "clamp(3rem, 12.5vw, 14rem)",
                     fontWeight: 900,
                     letterSpacing: "-0.03em",
                     color: "transparent",
