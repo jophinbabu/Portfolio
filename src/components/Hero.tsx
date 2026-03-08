@@ -131,6 +131,7 @@ function HeroGeometry({ x, y }: { x: any; y: any }) {
         left: "50%",
         x: "-50%",
         y: "-50%",
+        marginTop: "0.2em", // Slight visual adjustment to center on name block
         width: "clamp(280px, 85vw, 1100px)",
         height: "clamp(280px, 85vw, 1100px)",
         zIndex: 0,
@@ -544,11 +545,10 @@ export default function Hero() {
 
 
 
-          {/* ── Geometry ── */}
-          <HeroGeometry x={mx} y={my} />
-
           {/* ── Name block ── */}
           <div style={{ textAlign: "center", position: "relative" }}>
+            {/* ── Geometry ── */}
+            <HeroGeometry x={mx} y={my} />
 
             {/* FIRST */}
             <div style={{
