@@ -21,14 +21,14 @@ export default function SocialSidebar() {
         color: '#0f172a',
       }}
     >
-      <a href="https://github.com/jophinbabu" target="_blank" rel="noopener noreferrer" style={{ transition: 'transform 0.2s' }}>
-        <Github size={20} />
+      <a href="https://github.com/jophinbabu" target="_blank" rel="noopener noreferrer" style={{ transition: 'all 0.3s', color: 'var(--fg)', opacity: 0.8 }} onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'scale(1)'; }}>
+        <Github size={24} />
       </a>
-      <a href="https://www.linkedin.com/in/jophin-babu-0ab046318" target="_blank" rel="noopener noreferrer" style={{ transition: 'transform 0.2s' }}>
-        <Linkedin size={20} />
+      <a href="https://www.linkedin.com/in/jophin-babu-0ab046318" target="_blank" rel="noopener noreferrer" style={{ transition: 'all 0.3s', color: '#0077b5', opacity: 0.8 }} onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'scale(1)'; }}>
+        <Linkedin size={24} />
       </a>
-      <a href="mailto:jophinbabu@example.com" style={{ transition: 'transform 0.2s' }}>
-        <Mail size={20} />
+      <a href="mailto:jophin735@gmail.com" style={{ transition: 'all 0.3s', color: 'var(--accent)', opacity: 0.8 }} onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.8'; e.currentTarget.style.transform = 'scale(1)'; }}>
+        <Mail size={24} />
       </a>
       
       <div style={{ width: '1px', height: '60px', backgroundColor: 'rgba(15,23,42,0.15)', margin: '0 auto' }} />

@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard";
 import AnimateInView from "@/components/AnimateInView";
 import ScrollRevealText from "@/components/ScrollRevealText";
 import GlowCard from "@/components/GlowCard";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -12,12 +13,67 @@ export default function Home() {
       <Hero />
       
       {/* ─── INTRO SECTION ─── */}
-      <section id="about" style={{ padding: '10rem 0 8rem', backgroundColor: 'var(--background)', position: 'relative' }}>
-        <div className="container">
+      <section id="about" style={{ padding: '10rem 0 8rem', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
+        {/* ─ Dot Grid Pattern ─ */}
+        <div
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(rgba(15,23,42,0.08) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            zIndex: 0, pointerEvents: "none",
+          }}
+        />
+
+        {/* ─ Vertical Grid lines ─ */}
+        {[16.66, 33.33, 50, 66.66, 83.33].map((p, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${p}%`,
+              top: 0, bottom: 0,
+              width: "1px",
+              background: "rgba(15,23,42,0.03)",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+        ))}
+
+        {/* ─ Radial glow ─ */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "clamp(400px, 60vw, 800px)",
+            height: "clamp(400px, 60vw, 800px)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 65%)",
+            filter: "blur(60px)",
+            zIndex: 0, pointerEvents: "none",
+          }}
+        />
+
+        {/* ─ Horizontal midline ─ */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: 0, right: 0,
+            height: "1px",
+            background: "linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.1) 25%, rgba(37,99,235,0.1) 75%, transparent 100%)",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        />
+
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           {/* Section label row */}
           <AnimateInView yOffset={20}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '4rem' }}>
-              <p className="section-label" style={{ margin: 0 }}><span>//</span> Intro</p>
+              <p className="section-label" style={{ margin: 0, color: 'var(--fg3)', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
+                <span style={{ color: 'var(--accent)' }}>//</span> Intro
+              </p>
               <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
             </div>
           </AnimateInView>
@@ -84,7 +140,7 @@ export default function Home() {
             <AnimateInView yOffset={30} delay={0.15}>
               <div className="stats-grid">
                 {[
-                  { value: '1', label: 'Year of Experience' },
+                  { value: '2', label: 'Year of Experience' },
                   { value: '6', label: 'Projects Delivered' },
                   { value: '4', label: 'Domains Explored' },
                   { value: '∞', label: 'Curiosity Level' },
@@ -111,12 +167,40 @@ export default function Home() {
       </section>
 
       {/* ─── EXPERTISE SECTION ─── */}
-      <section style={{ padding: '8rem 0', backgroundColor: 'var(--section-dark-bg)', color: 'var(--section-dark-fg)' }}>
-        <div className="container">
+      <section style={{ padding: '8rem 0', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
+        {/* ─ Dot Grid Pattern ─ */}
+        <div
+          style={{
+            position: "absolute", inset: 0,
+            backgroundImage: "radial-gradient(rgba(15,23,42,0.06) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+            zIndex: 0, pointerEvents: "none",
+          }}
+        />
+
+        {/* ─ Vertical Grid lines ─ */}
+        {[16.66, 33.33, 50, 66.66, 83.33].map((p, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${p}%`,
+              top: 0, bottom: 0,
+              width: "1px",
+              background: "rgba(15,23,42,0.02)",
+              zIndex: 0,
+              pointerEvents: "none",
+            }}
+          />
+        ))}
+
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <AnimateInView yOffset={20}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '5rem' }}>
-              <p className="section-label" style={{ margin: 0 }}><span>//</span> Expertise</p>
-              <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.1)' }} />
+              <p className="section-label" style={{ margin: 0, color: 'var(--fg3)', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
+                <span style={{ color: 'var(--accent)' }}>//</span> Expertise
+              </p>
+              <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
             </div>
           </AnimateInView>
 

@@ -15,7 +15,7 @@ import { useEffect, useState, useRef } from "react";
 ───────────────────────────────────────────── */
 const ROLES = ["Full-Stack Developer", "AI / ML Engineer", "Creative Builder"];
 const STATS = [
-  { value: "1", label: "Year Exp." },
+  { value: "2", label: "Year Experience" },
   { value: "6", label: "Projects" },
   { value: "10+", label: "Tech Stacks" },
 ];
@@ -157,8 +157,8 @@ export default function Hero() {
           --accent:  #2563eb;
           --accent2: #3b82f6;
           --fg:      #0f172a;
-          --fg2:     rgba(15,23,42,0.65);
-          --fg3:     rgba(15,23,42,0.4);
+          --fg2:     rgba(15,23,42,0.75);
+          --fg3:     rgba(15,23,42,0.55);
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -203,7 +203,7 @@ export default function Hero() {
 
         /* ── Social links ── */
         .s-link {
-          color: var(--fg3);
+          color: var(--fg2);
           text-decoration: none;
           font-size: 0.62rem; font-weight: 500;
           letter-spacing: 0.18em; text-transform: uppercase;
@@ -616,6 +616,10 @@ export default function Hero() {
             <a href="/resume.pdf" download="Jophin_Babu_Resume.pdf" type="application/pdf" className="btn-primary">
               Download Resume
               <span style={{ opacity: 0.75 }}>↓</span>
+            </a>
+            <a href="#contact" className="btn-primary" style={{ background: 'transparent', color: 'var(--accent)', borderColor: 'var(--accent)' }}>
+              Contact Me
+              <span style={{ opacity: 0.75 }}>✉</span>
             </a>
             <a href="#projects" className="btn-ghost">
               View Projects
