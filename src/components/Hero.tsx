@@ -416,41 +416,7 @@ export default function Hero() {
           }}
         >
 
-          {/* Eyebrow pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.18 }}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.7rem",
-              marginBottom: "clamp(1rem, 2.5vw, 2rem)",
-              padding: "0.3rem 0.9rem",
-              border: "1px solid rgba(34,197,94,0.22)",
-              borderRadius: "3px",
-              background: "rgba(34,197,94,0.05)",
-            }}
-          >
-            <motion.span
-              animate={{ opacity: [1, 0.2, 1] }}
-              transition={{ duration: 2.2, repeat: Infinity }}
-              style={{
-                width: 5, height: 5,
-                borderRadius: "50%",
-                background: "#22c55e",
-                display: "inline-block", flexShrink: 0,
-              }}
-            />
-            <span style={{
-              fontSize: "0.58rem", fontWeight: 600,
-              letterSpacing: "0.2em", textTransform: "uppercase",
-              color: "rgba(34,197,94,0.75)",
-              fontFamily: "'DM Mono', monospace",
-            }}>
-              Available for work
-            </span>
-          </motion.div>
+
 
           {/* ── Name block ── */}
           <div style={{ textAlign: "center", position: "relative" }}>

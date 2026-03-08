@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,8 +9,8 @@ export const metadata = {
   title: "Jophin Babu | Portfolio",
   description: "Minimalist portfolio of Jophin Babu, Software Developer.",
   icons: {
-    icon: "/logo.jpg",
-    apple: "/logo.jpg",
+    icon: "/logo.svg",
+    apple: "/logo.svg",
   },
 };
 
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <CustomCursor />
         <Navigation />
         {children}
         <Footer />

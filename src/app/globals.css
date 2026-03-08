@@ -23,38 +23,6 @@ html, body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Hide default cursor on desktop when using custom cursor */
-  cursor: none;
-}
-
-/* Ensure links and interactive elements also hide default cursor */
-a, button, input, textarea, select {
-  cursor: none !important;
-}
-
-/* Custom Cursor Styles */
-.custom-cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--accent);
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.custom-cursor-outline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--accent);
-  pointer-events: none;
-  z-index: 9998;
 }
 
 /* Subtle Film Grain / Noise Overlay */
