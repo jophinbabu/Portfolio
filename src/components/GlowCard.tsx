@@ -16,8 +16,11 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
   const [floatDelay, setFloatDelay] = useState(0);
   const [glowPhase, setGlowPhase] = useState(0);
 
-  // Autonomous animation loop — always runs, works on mobile too
+  // Autonomous animation loop — only runs on desktop for performance
   useEffect(() => {
+    const isMobile = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+    if (isMobile) return;
+
     let start: number | null = null;
     const duration = 4000 + Math.random() * 2000;
 
@@ -138,7 +141,7 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
           position: relative;
           height: 100%;
           border-radius: 18px;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.98);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           overflow: hidden;
@@ -160,6 +163,21 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
           );
           pointer-events: none;
           z-index: 2;
+        }
+
+        @media (pointer: coarse), (max-width: 768px) {
+          .gc-body {
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            background: #ffffff;
+          }
+          .gc-wrap::before, .gc-border, .gc-particle {
+            animation-duration: 5s !important; /* Slow down for mobile CPU */
+          }
+           .gc-wrap {
+            transform: none !important;
+            transition: none !important;
+          }
         }
 
         /* Top shimmer line */
