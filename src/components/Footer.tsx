@@ -28,10 +28,10 @@ export default function Footer() {
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_placeholder',
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_placeholder',
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          name: formData.name,
+          email: formData.email,
           message: formData.message,
-          to_email: 'jophin735@gmail.com', // destination email
+          title: 'Portfolio Inquiry', // adding a default title for the template
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'public_key_placeholder'
       );
