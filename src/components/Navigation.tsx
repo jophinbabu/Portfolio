@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Moon, Sun } from "lucide-react";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
@@ -73,7 +74,7 @@ export default function Navigation() {
           bottom: -2px;
           left: 0; right: 0;
           height: 1px;
-          background: #2563eb;
+          background: var(--accent);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
@@ -110,7 +111,6 @@ export default function Navigation() {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.95rem;
           cursor: pointer;
           transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
         }
@@ -244,7 +244,7 @@ export default function Navigation() {
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
           >
-            {theme === "dark" ? "L" : "D"}
+            {theme === "dark" ? <Sun size={16} strokeWidth={2} /> : <Moon size={16} strokeWidth={2} />}
           </button>
 
           {/* Divider */}

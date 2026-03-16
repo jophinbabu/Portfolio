@@ -119,10 +119,10 @@ export default function Home() {
             {/* Left column — description with accent border */}
             <AnimateInView yOffset={30}>
               <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '2rem' }}>
-                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: '#444', marginBottom: '1.5rem' }}>
+                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--fg)', marginBottom: '1.5rem' }}>
                   Bringing your vision to life quickly and efficiently—whether it&apos;s web apps, AI systems, or mobile platforms—I&apos;ve got it covered, delivering smooth and effective solutions from start to finish.
                 </p>
-                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: '#777' }}>
+                <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--fg2)' }}>
                   I&apos;ve architected full-stack AI pipelines, built real-time platforms used by medical professionals, and engineered quantitative trading models. I love turning complex logic into seamless experiences.
                 </p>
               </div>
@@ -156,7 +156,7 @@ export default function Home() {
                     }}>
                       {stat.value}
                     </p>
-                    <p style={{ fontSize: '0.85rem', fontWeight: 500, color: '#888', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 500, color: 'var(--fg3)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
                       {stat.label}
                     </p>
                   </div>
@@ -251,7 +251,7 @@ export default function Home() {
                     </span>
                     <h3 style={{ fontSize: '1.4rem', fontWeight: 700, margin: 0 }}>{skill.title}</h3>
                   </div>
-                  <p style={{ fontSize: '0.95rem', lineHeight: 1.6, color: 'rgba(15,23,42,0.6)', marginBottom: '1.5rem', flex: 1 }}>
+                  <p style={{ fontSize: '0.95rem', lineHeight: 1.6, color: 'var(--fg2)', marginBottom: '1.5rem', flex: 1 }}>
                     {skill.desc}
                   </p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -263,8 +263,9 @@ export default function Home() {
                           fontWeight: 500,
                           padding: '0.35rem 0.75rem',
                           borderRadius: '100px',
-                          border: `1px solid rgba(15,23,42,0.15)`,
-                          color: 'rgba(15,23,42,0.65)',
+                          border: `1px solid var(--border)`,
+                          color: 'var(--fg2)',
+                          background: 'var(--surface)',
                           letterSpacing: '0.03em',
                         }}
                       >

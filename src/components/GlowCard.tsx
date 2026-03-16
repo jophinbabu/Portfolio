@@ -129,7 +129,7 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
             from var(--border-angle),
             transparent 20%,
             var(--glow-color) 45%,
-            #ffffff 50%,
+            var(--surface-strong) 50%,
             var(--glow-color) 55%,
             transparent 80%
           );
@@ -142,14 +142,14 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
           position: relative;
           height: 100%;
           border-radius: 18px;
-          background: rgba(255, 255, 255, 0.98);
+          background: var(--surface-strong);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           overflow: hidden;
           box-shadow:
             0 4px 32px rgba(0,0,0,0.07),
             0 1px 4px rgba(0,0,0,0.04),
-            inset 0 1px 0 rgba(255,255,255,1);
+            inset 0 1px 0 color-mix(in srgb, var(--surface-strong) 75%, white);
         }
 
         /* Moving spotlight — very soft tint on white */
@@ -187,7 +187,7 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
           .gc-body {
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
-            background: #ffffff !important;
+            background: var(--surface-strong) !important;
           }
           .gc-particle, .gc-shimmer, .gc-spotlight {
             display: none !important;
