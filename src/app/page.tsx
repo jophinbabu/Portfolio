@@ -92,12 +92,14 @@ export default function Home() {
               letter-spacing: -0.03em;
               margin-bottom: 0;
               max-width: 1200px;
+              color: var(--fg);
             }
             .intro-grid {
               display: grid;
               grid-template-columns: 1fr 1fr;
               gap: 6rem;
               margin-top: 6rem;
+              align-items: start;
             }
             .stats-grid {
               display: grid;
@@ -105,11 +107,36 @@ export default function Home() {
               gap: 3rem;
               padding-top: 0.5rem;
             }
+            .intro-panel {
+              border: 1px solid var(--border);
+              border-left: 3px solid var(--accent);
+              border-radius: 0 22px 22px 0;
+              padding: 2rem 2rem 2rem 2.2rem;
+              background:
+                linear-gradient(135deg, color-mix(in srgb, var(--surface) 85%, transparent), transparent 75%),
+                var(--surface);
+              box-shadow: var(--shadow-soft);
+            }
+            .intro-stat-card {
+              border: 1px solid var(--border);
+              border-radius: 18px;
+              padding: 1.4rem 1.35rem;
+              background:
+                linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 88%, transparent), var(--surface));
+              box-shadow: var(--shadow-soft);
+            }
             @media (max-width: 1024px) {
               .intro-grid {
                 grid-template-columns: 1fr;
                 gap: 4rem;
                 margin-top: 4rem;
+              }
+              .intro-panel {
+                border-radius: 0 18px 18px 0;
+                padding: 1.5rem 1.35rem 1.5rem 1.6rem;
+              }
+              .stats-grid {
+                gap: 1rem;
               }
             }
           `}</style>
@@ -118,7 +145,10 @@ export default function Home() {
           <div className="intro-grid">
             {/* Left column — description with accent border */}
             <AnimateInView yOffset={30}>
-              <div style={{ borderLeft: '3px solid var(--accent)', paddingLeft: '2rem' }}>
+              <div className="intro-panel">
+                <p style={{ fontSize: '0.68rem', lineHeight: 1.6, color: 'var(--accent)', marginBottom: '1rem', letterSpacing: '0.18em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                  Product Thinking + Execution
+                </p>
                 <p style={{ fontSize: '1.15rem', lineHeight: 1.8, color: 'var(--fg)', marginBottom: '1.5rem' }}>
                   Bringing your vision to life quickly and efficiently—whether it&apos;s web apps, AI systems, or mobile platforms—I&apos;ve got it covered, delivering smooth and effective solutions from start to finish.
                 </p>
@@ -146,7 +176,7 @@ export default function Home() {
                   { value: '4', label: 'Domains Explored' },
                   { value: '∞', label: 'Curiosity Level' },
                 ].map((stat, i) => (
-                  <div key={i} style={{ textAlign: 'left' }}>
+                  <div key={i} className="intro-stat-card" style={{ textAlign: 'left' }}>
                     <p style={{
                       fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
                       fontWeight: 900,
