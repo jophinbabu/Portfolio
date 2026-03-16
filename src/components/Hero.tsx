@@ -116,6 +116,85 @@ function Ticker() {
   );
 }
 
+function ResumePreviewCard() {
+  return (
+    <div
+      style={{
+        width: "min(380px, 92vw)",
+        borderRadius: "18px",
+        border: "1px solid rgba(15,23,42,0.1)",
+        background: "rgba(255,255,255,0.82)",
+        backdropFilter: "blur(18px)",
+        boxShadow: "0 24px 60px rgba(15,23,42,0.08)",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "1rem 1.1rem",
+          borderBottom: "1px solid rgba(15,23,42,0.08)",
+        }}
+      >
+        <div>
+          <p
+            style={{
+              fontSize: "0.62rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--accent)",
+              fontFamily: "var(--font-mono)",
+              marginBottom: "0.35rem",
+            }}
+          >
+            Resume Preview
+          </p>
+          <p
+            style={{
+              fontSize: "0.95rem",
+              fontWeight: 700,
+              color: "var(--fg)",
+              fontFamily: "var(--font-sans)",
+            }}
+          >
+            Jophin Babu - Full-Stack Developer
+          </p>
+        </div>
+        <a
+          href={portfolioAssets.resume}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            fontSize: "0.65rem",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: "var(--fg2)",
+            fontFamily: "var(--font-mono)",
+          }}
+        >
+          Open PDF
+        </a>
+      </div>
+
+      <div style={{ height: "280px", background: "#f8fafc" }}>
+        <iframe
+          src={`${portfolioAssets.resume}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
+          title="Resume preview"
+          loading="lazy"
+          style={{
+            width: "100%",
+            height: "100%",
+            border: "0",
+            display: "block",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────
    HERO GEOMETRY (CIRCLES)
 ───────────────────────────────────────────── */
@@ -752,6 +831,17 @@ export default function Hero() {
               View Projects
               <span style={{ opacity: 0.45 }}>→</span>
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 26 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.82, duration: 0.85 }}
+            style={{
+              marginTop: "clamp(1.5rem, 3vw, 2.4rem)",
+            }}
+          >
+            <ResumePreviewCard />
           </motion.div>
 
         </motion.div>

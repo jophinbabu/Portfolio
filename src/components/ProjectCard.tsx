@@ -12,9 +12,22 @@ type ProjectProps = {
   imageSrc?: string | readonly string[];
   link?: string;
   year?: string;
+  impact?: string;
+  metrics?: readonly { value: string; label: string }[];
+  stack?: readonly string[];
 };
 
-export default function ProjectCard({ title, category, description, imageSrc, link, year = "2024" }: ProjectProps) {
+export default function ProjectCard({
+  title,
+  category,
+  description,
+  imageSrc,
+  link,
+  year = "2024",
+  impact,
+  metrics = [],
+  stack = [],
+}: ProjectProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
@@ -146,6 +159,100 @@ export default function ProjectCard({ title, category, description, imageSrc, li
         }}>
           {description}
         </p>
+
+        {(impact || metrics.length > 0) && (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '1rem',
+            marginTop: '2rem',
+          }}>
+            {impact && (
+              <div style={{
+                border: '1px solid var(--border)',
+                borderRadius: '12px',
+                padding: '1rem 1.1rem',
+                background: 'rgba(255,255,255,0.75)',
+              }}>
+                <p style={{
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                  marginBottom: '0.7rem',
+                  fontFamily: 'var(--font-mono)',
+                }}>
+                  Impact
+                </p>
+                <p style={{
+                  fontSize: '0.95rem',
+                  lineHeight: 1.6,
+                  color: 'var(--fg2)',
+                }}>
+                  {impact}
+                </p>
+              </div>
+            )}
+
+            {metrics.length > 0 && (
+              <div style={{
+                border: '1px solid var(--border)',
+                borderRadius: '12px',
+                padding: '1rem 1.1rem',
+                background: 'rgba(255,255,255,0.75)',
+              }}>
+                <p style={{
+                  fontSize: '0.6rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  color: 'var(--accent)',
+                  marginBottom: '0.8rem',
+                  fontFamily: 'var(--font-mono)',
+                }}>
+                  Key Metrics
+                </p>
+                <div style={{ display: 'grid', gap: '0.7rem' }}>
+                  {metrics.map((metric) => (
+                    <div key={`${metric.label}-${metric.value}`} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+                      <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--fg)' }}>{metric.value}</span>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--fg3)', textAlign: 'right' }}>{metric.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {stack.length > 0 && (
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.55rem',
+            marginTop: '1.2rem',
+          }}>
+            {stack.map((item) => (
+              <span
+                key={item}
+                style={{
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  padding: '0.45rem 0.8rem',
+                  borderRadius: '999px',
+                  border: '1px solid rgba(15,23,42,0.12)',
+                  background: 'rgba(255,255,255,0.8)',
+                  color: 'var(--fg2)',
+                  fontFamily: 'var(--font-mono)',
+                  letterSpacing: '0.03em',
+                }}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div style={{ 
           display: 'flex', 

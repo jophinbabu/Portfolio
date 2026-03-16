@@ -350,6 +350,13 @@ export default function Home() {
                 title="BloodLink"
                 category="React Native & Spring Boot"
                 description="A full-cycle Laboratory Information Management System (LIMS) deployed live at Amala Hospital, used daily by 50+ medical staff. Tracks blood units end-to-end from donor registration to issuance, with 100% traceability across 2000+ donors."
+                impact="Replaced manual blood-bank workflows with a live traceability system used by hospital staff every day."
+                metrics={[
+                  { value: '50+', label: 'medical staff using it daily' },
+                  { value: '2000+', label: 'donor records tracked' },
+                  { value: '100%', label: 'unit-level traceability' },
+                ]}
+                stack={['React Native', 'Spring Boot', 'PostgreSQL', 'Hospital Ops']}
                 imageSrc={portfolioAssets.projects.bloodlink}
                 link="https://github.com"
                 year="2026"
@@ -360,6 +367,13 @@ export default function Home() {
                 title="RoadGuard AI"
                 category="Computer Vision & Full-Stack"
                 description="An end-to-end computer vision pipeline that automates road infrastructure inspection. A vehicle-mounted phone captures GPS-tagged frames, streams them to a YOLOv8 inference server, and plots real-time defect markers on a live Leaflet map dashboard."
+                impact="Turned road inspection into a real-time field workflow with GPS-tagged detections and map-based review."
+                metrics={[
+                  { value: 'Live', label: 'defect plotting on dashboard' },
+                  { value: 'YOLOv8', label: 'vision inference pipeline' },
+                  { value: 'GPS', label: 'frame-level geotagging' },
+                ]}
+                stack={['YOLOv8', 'Leaflet', 'FastAPI', 'Realtime Streaming']}
                 imageSrc={portfolioAssets.projects.roadguard}
                 link="http://3.6.94.162:8000/"
                 year="2026"
@@ -370,6 +384,13 @@ export default function Home() {
                 title="Tata Trading AI"
                 category="Quantitative Trading"
                 description="A quantitative trading system for the Indian stock market. Built with a custom Confidence Threshold Optimizer and a LightGBM model trained on 33 technical indicators."
+                impact="Combined model confidence scoring with technical analysis to produce a more decision-ready trading signal."
+                metrics={[
+                  { value: '33', label: 'technical indicators used' },
+                  { value: 'LightGBM', label: 'core predictive model' },
+                  { value: 'Custom', label: 'confidence threshold optimizer' },
+                ]}
+                stack={['LightGBM', 'Python', 'Technical Analysis', 'Signal Optimization']}
                 imageSrc={portfolioAssets.projects.tataTrading}
                 link="https://tatasteel-ai-prediciton-model.vercel.app"
                 year="2026"
@@ -379,6 +400,12 @@ export default function Home() {
               <ProjectCard 
                 title="Automatic Exam Seating System"
                 category="React, Node.js, MongoDB"
+                impact="Compressed a slow manual academic workflow into an automated planning system built for large seating constraints."
+                metrics={[
+                  { value: 'Days -> Minutes', label: 'planning time reduced' },
+                  { value: 'Auto', label: 'constraint-based seat allocation' },
+                ]}
+                stack={['React', 'Node.js', 'MongoDB', 'Scheduling Logic']}
                 description="An automated seating arrangement system that handles complex scheduling constraints for exams. Reduced planning time from days to minutes using constraint-based algorithms — eliminating the manual effort typically involved in organizing large-scale exam halls."
                 year="2024"
               />
@@ -387,6 +414,12 @@ export default function Home() {
               <ProjectCard 
                 title="PaisaWise"
                 category="Python, Random Forest"
+                impact="Made budgeting more proactive by forecasting near-term financial needs from historical spending data."
+                metrics={[
+                  { value: 'Quarterly', label: 'budget forecasting horizon' },
+                  { value: 'ML', label: 'prediction-driven planning' },
+                ]}
+                stack={['Python', 'Random Forest', 'Forecasting', 'Financial Data']}
                 description="A machine learning-powered financial tool that forecasts an organisation's budget for the next quarter. Built around a Random Forest model, it analyzes historical financial data to deliver accurate, data-driven budget predictions — helping organisations plan smarter and reduce financial uncertainty."
                 link="https://github.com"
                 year="2025"
@@ -396,6 +429,13 @@ export default function Home() {
               <ProjectCard 
                 title="BigChat Platform"
                 category="Real-Time Systems"
+                impact="Packaged multiple synchronous collaboration tools into one fast, secure communication experience."
+                metrics={[
+                  { value: 'E2E', label: 'encrypted messaging flow' },
+                  { value: 'WebRTC', label: 'video calling engine' },
+                  { value: 'Realtime', label: 'canvas and game sync' },
+                ]}
+                stack={['Socket.io', 'WebRTC', 'E2E Encryption', 'Realtime UX']}
                 description="A secure platform with End-to-End Encryption, WebRTC video calling, a shared canvas, and multiplayer mini-games — all synced in real time via Socket.io."
                 imageSrc={portfolioAssets.projects.bigChat}
                 link="https://bigchat-frontend.vercel.app"
