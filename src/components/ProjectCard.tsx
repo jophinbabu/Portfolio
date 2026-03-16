@@ -8,7 +8,7 @@ type ProjectProps = {
   title: string;
   category: string;
   description: string;
-  imageSrc?: string | string[];
+  imageSrc?: string | readonly string[];
   link?: string;
   year?: string;
 };

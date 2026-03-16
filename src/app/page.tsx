@@ -5,6 +5,7 @@ import ProjectCard from "@/components/ProjectCard";
 import AnimateInView from "@/components/AnimateInView";
 import ScrollRevealText from "@/components/ScrollRevealText";
 import GlowCard from "@/components/GlowCard";
+import { portfolioAssets } from "@/lib/portfolioAssets";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -349,13 +350,7 @@ export default function Home() {
                 title="BloodLink"
                 category="React Native & Spring Boot"
                 description="A full-cycle Laboratory Information Management System (LIMS) deployed live at Amala Hospital, used daily by 50+ medical staff. Tracks blood units end-to-end from donor registration to issuance, with 100% traceability across 2000+ donors."
-                imageSrc={[
-                  "/bloodlink-1.png",
-                  "/bloodlink-2.jpg",
-                  "/bloodlink-3.jpg",
-                  "/bloodlink-4.jpg",
-                  "/bloodlink-5.jpg"
-                ]}
+                imageSrc={portfolioAssets.projects.bloodlink}
                 link="https://github.com"
                 year="2026"
               />
@@ -365,11 +360,7 @@ export default function Home() {
                 title="RoadGuard AI"
                 category="Computer Vision & Full-Stack"
                 description="An end-to-end computer vision pipeline that automates road infrastructure inspection. A vehicle-mounted phone captures GPS-tagged frames, streams them to a YOLOv8 inference server, and plots real-time defect markers on a live Leaflet map dashboard."
-                imageSrc={[
-                  "/roadguard-1.jpg",
-                  "/roadguard-2.jpg",
-                  "/roadguard-3.png"
-                ]}
+                imageSrc={portfolioAssets.projects.roadguard}
                 link="http://3.6.94.162:8000/"
                 year="2026"
               />
@@ -379,7 +370,7 @@ export default function Home() {
                 title="Tata Trading AI"
                 category="Quantitative Trading"
                 description="A quantitative trading system for the Indian stock market. Built with a custom Confidence Threshold Optimizer and a LightGBM model trained on 33 technical indicators."
-                imageSrc="/tata-trading.png"
+                imageSrc={portfolioAssets.projects.tataTrading}
                 link="https://tatasteel-ai-prediciton-model.vercel.app"
                 year="2026"
               />
@@ -406,11 +397,7 @@ export default function Home() {
                 title="BigChat Platform"
                 category="Real-Time Systems"
                 description="A secure platform with End-to-End Encryption, WebRTC video calling, a shared canvas, and multiplayer mini-games — all synced in real time via Socket.io."
-                imageSrc={[
-                  "/bigchat-1.png",
-                  "/bigchat-2.png",
-                  "/bigchat-3.png"
-                ]}
+                imageSrc={portfolioAssets.projects.bigChat}
                 link="https://bigchat-frontend.vercel.app"
                 year="2026"
               />

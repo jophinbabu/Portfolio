@@ -9,6 +9,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { portfolioAssets } from "@/lib/portfolioAssets";
 
 /* ─────────────────────────────────────────────
    DATA
@@ -387,7 +388,7 @@ export default function Hero() {
             filter: "grayscale(100%)",
           }}
         >
-          <source src="/hero-bg.mp4" type="video/mp4" />
+          <source src={portfolioAssets.heroVideo} type="video/mp4" />
         </video>
 
         {/* ─ Grid columns ─ */}
@@ -741,7 +742,7 @@ export default function Hero() {
               justifyContent: "center",
             }}
           >
-            <a href="/resume.pdf" download="Jophin_Babu_Resume.pdf" type="application/pdf" className="btn-primary">
+            <a href={portfolioAssets.resume} download="Jophin_Babu_Resume.pdf" type="application/pdf" className="btn-primary">
               Download Resume
               <span style={{ opacity: 0.75 }}>↓</span>
             </a>
