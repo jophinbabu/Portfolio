@@ -245,10 +245,11 @@ export default function ProjectCard({
                   padding: '0.45rem 0.8rem',
                   borderRadius: '999px',
                   border: '1px solid rgba(15,23,42,0.12)',
-                  background: 'rgba(255,255,255,0.8)',
-                  color: 'var(--fg2)',
+                  background: 'var(--surface-strong)',
+                  color: 'var(--fg)',
                   fontFamily: 'var(--font-mono)',
                   letterSpacing: '0.03em',
+                  boxShadow: 'inset 0 1px 0 color-mix(in srgb, var(--surface-strong) 70%, white)',
                 }}
               >
                 {item}
