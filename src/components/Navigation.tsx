@@ -15,7 +15,30 @@ export default function Navigation() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const savedTheme = window.localStorage.getItem("portfolio-theme");
+    const preferredDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const nextTheme =
+      savedTheme === "dark" || savedTheme === "light"
+        ? (savedTheme as "light" | "dark")
+        : preferredDark
+          ? "dark"
+          : "light";
+
+    root.dataset.theme = nextTheme;
+    setTheme(nextTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const root = document.documentElement;
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    root.dataset.theme = nextTheme;
+    window.localStorage.setItem("portfolio-theme", nextTheme);
+    setTheme(nextTheme);
+  };
 
   useEffect(() => {
     const unsub = scrollY.on("change", (v) => setScrolled(v > 40));
@@ -38,12 +61,12 @@ export default function Navigation() {
           letter-spacing: 0.2em;
           text-transform: uppercase;
           font-family: var(--font-mono);
-          color: rgba(15,23,42,0.45);
+          color: var(--fg3);
           text-decoration: none;
           transition: color 0.25s;
           padding: 0.25rem 0;
         }
-        .nav-link:hover { color: rgba(15,23,42,0.9); }
+        .nav-link:hover { color: var(--fg); }
         .nav-link::after {
           content: '';
           position: absolute;
@@ -64,8 +87,8 @@ export default function Navigation() {
           text-transform: uppercase;
           font-family: var(--font-mono);
           color: #fff;
-          background: #2563eb;
-          border: 1.5px solid #2563eb;
+          background: var(--accent);
+          border: 1.5px solid var(--accent);
           border-radius: 3px;
           padding: 0.45rem 1.1rem;
           text-decoration: none;
@@ -73,15 +96,35 @@ export default function Navigation() {
           white-space: nowrap;
         }
         .nav-cta:hover {
-          background: #1d4ed8;
+          background: var(--accent-strong);
           box-shadow: 0 6px 24px rgba(37,99,235,0.3);
+        }
+
+        .theme-toggle {
+          width: 38px;
+          height: 38px;
+          border-radius: 999px;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          color: var(--fg);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.95rem;
+          cursor: pointer;
+          transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .theme-toggle:hover {
+          transform: translateY(-1px);
+          background: var(--surface-strong);
+          border-color: rgba(96,165,250,0.45);
         }
 
         .hamburger-line {
           display: block;
           width: 100%;
           height: 1px;
-          background: rgba(15,23,42,0.55);
+          background: var(--fg2);
           transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s;
         }
 
@@ -91,7 +134,7 @@ export default function Navigation() {
           letter-spacing: 0.22em;
           text-transform: uppercase;
           font-family: var(--font-mono);
-          color: rgba(15,23,42,0.5);
+          color: var(--fg3);
           text-decoration: none;
           display: flex;
           align-items: center;
@@ -100,7 +143,7 @@ export default function Navigation() {
           border-bottom: 1px solid rgba(15,23,42,0.08);
           transition: color 0.25s;
         }
-        .mobile-nav-link:hover { color: rgba(15,23,42,0.9); }
+        .mobile-nav-link:hover { color: var(--fg); }
         .mobile-nav-link-num {
           font-size: 0.52rem;
           color: rgba(37,99,235,0.6);
@@ -129,8 +172,8 @@ export default function Navigation() {
           alignItems: "center",
           justifyContent: "space-between",
           transition: "height 0.35s cubic-bezier(0.16,1,0.3,1), background 0.35s, border-color 0.35s",
-          background: scrolled ? "rgba(255,255,255,0.82)" : "transparent",
-          borderBottom: scrolled ? "1px solid rgba(15,23,42,0.08)" : "1px solid transparent",
+          background: scrolled ? "var(--surface)" : "transparent",
+          borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
           backdropFilter: scrolled ? "blur(16px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
         }}
@@ -148,10 +191,10 @@ export default function Navigation() {
             {/* Logo mark */}
             <div style={{
               width: "32px", height: "32px",
-              border: "1.5px solid rgba(37,99,235,0.4)",
+              border: "1.5px solid rgba(96,165,250,0.45)",
               borderRadius: "6px",
               display: "flex", alignItems: "center", justifyContent: "center",
-              background: "rgba(37,99,235,0.05)",
+              background: "rgba(96,165,250,0.12)",
               position: "relative",
               flexShrink: 0,
               overflow: "hidden", // added to contain the image
@@ -167,7 +210,7 @@ export default function Navigation() {
             <span style={{
               fontSize: "0.72rem", fontWeight: 600,
               letterSpacing: "0.06em",
-              color: "rgba(15,23,42,0.6)",
+              color: "var(--fg2)",
               fontFamily: "var(--font-sans)",
               display: "none",
             }}>
@@ -194,10 +237,20 @@ export default function Navigation() {
 
         {/* ── Right: CTA + Hamburger ── */}
         <div style={{ display: "flex", alignItems: "center", gap: "1.2rem" }}>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? "L" : "D"}
+          </button>
+
           {/* Divider */}
           <div style={{
             width: "1px", height: "16px",
-            background: "rgba(15,23,42,0.15)",
+            background: "var(--border)",
             display: "block",
           }} />
 
@@ -260,7 +313,7 @@ export default function Navigation() {
               position: "fixed",
               top: 0, left: 0, right: 0, bottom: 0,
               zIndex: 90,
-              background: "rgba(255,255,255,0.97)",
+              background: "var(--surface-strong)",
               backdropFilter: "blur(20px)",
               display: "flex",
               flexDirection: "column",
@@ -272,7 +325,7 @@ export default function Navigation() {
               <span style={{
                 fontSize: "0.55rem", fontWeight: 600,
                 letterSpacing: "0.28em", textTransform: "uppercase",
-                color: "rgba(37,99,235,0.55)",
+                color: "var(--accent)",
                 fontFamily: "var(--font-mono)",
               }}>
                 Navigation
@@ -320,13 +373,13 @@ export default function Navigation() {
                   style={{
                     fontSize: "0.6rem", fontWeight: 500,
                     letterSpacing: "0.18em", textTransform: "uppercase",
-                    color: "rgba(15,23,42,0.45)",
+                    color: "var(--fg3)",
                     textDecoration: "none",
                     fontFamily: "var(--font-mono)",
                     transition: "color 0.2s",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(15,23,42,0.95)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(15,23,42,0.45)")}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--fg)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--fg3)")}
                 >
                   {label} ↗
                 </a>

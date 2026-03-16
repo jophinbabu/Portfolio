@@ -120,12 +120,12 @@ function ResumePreviewCard() {
   return (
     <div
       style={{
-        width: "min(380px, 92vw)",
-        borderRadius: "18px",
-        border: "1px solid rgba(15,23,42,0.1)",
-        background: "rgba(255,255,255,0.82)",
+        width: "min(320px, 90vw)",
+        borderRadius: "16px",
+        border: "1px solid var(--border)",
+        background: "var(--surface)",
         backdropFilter: "blur(18px)",
-        boxShadow: "0 24px 60px rgba(15,23,42,0.08)",
+        boxShadow: "var(--shadow-soft)",
         overflow: "hidden",
       }}
     >
@@ -135,7 +135,7 @@ function ResumePreviewCard() {
           justifyContent: "space-between",
           alignItems: "center",
           padding: "1rem 1.1rem",
-          borderBottom: "1px solid rgba(15,23,42,0.08)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <div>
@@ -170,7 +170,7 @@ function ResumePreviewCard() {
             fontSize: "0.65rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            color: "var(--fg2)",
+            color: "var(--accent)",
             fontFamily: "var(--font-mono)",
           }}
         >
@@ -178,18 +178,75 @@ function ResumePreviewCard() {
         </a>
       </div>
 
-      <div style={{ height: "280px", background: "#f8fafc" }}>
-        <iframe
-          src={`${portfolioAssets.resume}#toolbar=0&navpanes=0&scrollbar=0&page=1&view=FitH`}
-          title="Resume preview"
-          loading="lazy"
+      <div
+        style={{
+          padding: "1rem 1.1rem 1.1rem",
+          background: "var(--surface-soft)",
+          display: "grid",
+          gap: "0.75rem",
+        }}
+      >
+        <div
           style={{
-            width: "100%",
-            height: "100%",
-            border: "0",
-            display: "block",
+            borderRadius: "12px",
+            border: "1px solid var(--border)",
+            background: "var(--surface-strong)",
+            padding: "0.9rem",
+            display: "grid",
+            gap: "0.7rem",
           }}
-        />
+        >
+          {[
+            { label: "Focus", value: "Full-stack product engineering" },
+            { label: "Strength", value: "AI systems and real-time apps" },
+            { label: "Based In", value: "Kochi, India" },
+          ].map((item) => (
+            <div
+              key={item.label}
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "1rem",
+                alignItems: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontSize: "0.62rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.14em",
+                  color: "var(--fg3)",
+                  fontFamily: "var(--font-mono)",
+                }}
+              >
+                {item.label}
+              </span>
+              <span
+                style={{
+                  fontSize: "0.82rem",
+                  color: "var(--fg2)",
+                  textAlign: "right",
+                }}
+              >
+                {item.value}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <a
+          href={portfolioAssets.resume}
+          download="Jophin_Babu_Resume.pdf"
+          className="btn-ghost"
+          style={{
+            justifyContent: "center",
+            padding: "0.78rem 1rem",
+            background: "var(--surface-strong)",
+          }}
+        >
+          Download Resume
+          <span style={{ opacity: 0.55 }}>PDF</span>
+        </a>
       </div>
     </div>
   );
@@ -337,19 +394,10 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        :root {
-          --bg:      #ffffff;
-          --border:  rgba(15,23,42,0.08);
-          --accent:  #2563eb;
-          --accent2: #3b82f6;
-          --fg:      #0f172a;
-          --fg2:     rgba(15,23,42,0.75);
-          --fg3:     rgba(15,23,42,0.55);
-        }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-          background: var(--bg);
-          color: var(--fg);
+          background: var(--background);
+          color: var(--foreground);
           font-family: var(--font-sans);
           -webkit-font-smoothing: antialiased;
           overflow-x: hidden;
@@ -435,7 +483,7 @@ export default function Hero() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "var(--bg)",
+          background: "var(--background)",
         }}
         onMouseMove={(e) => {
           const rect = sectionRef.current?.getBoundingClientRect();
@@ -544,8 +592,8 @@ export default function Hero() {
           <span style={{
             fontSize: "0.8rem", fontWeight: 700,
             letterSpacing: "0.04em",
-            color: "rgba(15,23,42,0.65)",
-            fontFamily: "'Outfit', sans-serif",
+              color: "var(--fg2)",
+              fontFamily: "var(--font-sans)",
           }}>
             JB<span style={{ color: "var(--accent)" }}>.</span>
           </span>
@@ -571,8 +619,8 @@ export default function Hero() {
             <span key={i} style={{
               fontSize: "0.54rem", fontWeight: 500,
               letterSpacing: "0.22em", textTransform: "uppercase",
-              color: i === 1 ? "rgba(37,99,235,0.65)" : "var(--fg3)",
-              fontFamily: "'DM Mono', monospace",
+              color: i === 1 ? "var(--accent)" : "var(--fg3)",
+              fontFamily: "var(--font-mono)",
             }}>{t}</span>
           ))}
         </motion.div>
@@ -596,7 +644,7 @@ export default function Hero() {
               fontSize: "0.52rem", fontWeight: 600,
               letterSpacing: "0.26em", textTransform: "uppercase",
               color: "var(--fg3)",
-              fontFamily: "'DM Mono', monospace",
+              fontFamily: "var(--font-mono)",
               whiteSpace: "nowrap",
               zIndex: 5, pointerEvents: "none",
             }}
@@ -644,7 +692,7 @@ export default function Hero() {
                     fontWeight: 900,
                     letterSpacing: "-0.03em",
                     color: "var(--fg)",
-                    fontFamily: "'Outfit', sans-serif",
+                    fontFamily: "var(--font-sans)",
                     userSelect: "none",
                     display: "inline-block",
                   }}
@@ -686,8 +734,8 @@ export default function Hero() {
                     fontWeight: 900,
                     letterSpacing: "-0.03em",
                     color: "transparent",
-                    WebkitTextStroke: "1.5px rgba(15,23,42,0.65)",
-                    fontFamily: "'Outfit', sans-serif",
+                    WebkitTextStroke: "1.5px color-mix(in srgb, var(--fg) 65%, transparent)",
+                    fontFamily: "var(--font-sans)",
                     userSelect: "none",
                     display: "inline-block",
                   }}
@@ -740,7 +788,7 @@ export default function Hero() {
                     letterSpacing: "0.2em",
                     textTransform: "uppercase",
                     color: "var(--fg2)",
-                    fontFamily: "'DM Mono', monospace",
+                    fontFamily: "var(--font-mono)",
                     whiteSpace: "nowrap",
                   }}
                 >
@@ -790,7 +838,7 @@ export default function Hero() {
                   fontSize: "clamp(1.3rem, 2.5vw, 1.9rem)",
                   fontWeight: 700, lineHeight: 1,
                   color: "var(--fg)",
-                  fontFamily: "'Outfit', sans-serif",
+                  fontFamily: "var(--font-sans)",
                   letterSpacing: "-0.02em",
                 }}>
                   {s.value}
@@ -799,7 +847,7 @@ export default function Hero() {
                   fontSize: "0.56rem", fontWeight: 500,
                   letterSpacing: "0.22em", textTransform: "uppercase",
                   color: "var(--fg3)",
-                  fontFamily: "'DM Mono', monospace",
+                  fontFamily: "var(--font-mono)",
                 }}>
                   {s.label}
                 </span>
@@ -864,7 +912,7 @@ export default function Hero() {
             justifyContent: "space-between",
             padding: "0 clamp(1.5rem, 4vw, 3.2rem)",
             zIndex: 10,
-            background: "rgba(255,255,255,0.75)",
+            background: "var(--surface)",
             backdropFilter: "blur(12px)",
           }}
         >
@@ -912,7 +960,7 @@ export default function Hero() {
             fontSize: "0.54rem", fontWeight: 500,
             letterSpacing: "0.22em", textTransform: "uppercase",
             color: "var(--fg3)",
-            fontFamily: "'DM Mono', monospace",
+            fontFamily: "var(--font-mono)",
           }}>
             01 / Hero
           </span>
