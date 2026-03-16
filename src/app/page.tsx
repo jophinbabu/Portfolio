@@ -357,7 +357,7 @@ export default function Home() {
                   { value: '2000+', label: 'donor records tracked' },
                   { value: '100%', label: 'unit-level traceability' },
                 ]}
-                stack={['React Native', 'Spring Boot', 'PostgreSQL', 'Hospital Ops']}
+                stack={['React Native', 'Spring Boot', 'PostgreSQL', 'LIMS Workflow']}
                 imageSrc={portfolioAssets.projects.bloodlink}
                 link="https://github.com"
                 year="2026"
@@ -374,7 +374,7 @@ export default function Home() {
                   { value: 'YOLOv8', label: 'vision inference pipeline' },
                   { value: 'GPS', label: 'frame-level geotagging' },
                 ]}
-                stack={['YOLOv8', 'Leaflet', 'FastAPI', 'Realtime Streaming']}
+                stack={['YOLOv8', 'FastAPI', 'Leaflet', 'GPS Frame Streaming']}
                 imageSrc={portfolioAssets.projects.roadguard}
                 link="http://3.6.94.162:8000/"
                 year="2026"
@@ -391,7 +391,7 @@ export default function Home() {
                   { value: 'LightGBM', label: 'core predictive model' },
                   { value: 'Custom', label: 'confidence threshold optimizer' },
                 ]}
-                stack={['LightGBM', 'Python', 'Technical Analysis', 'Signal Optimization']}
+                stack={['Python', 'LightGBM', 'Technical Indicators', 'Threshold Optimizer']}
                 imageSrc={portfolioAssets.projects.tataTrading}
                 link="https://tatasteel-ai-prediciton-model.vercel.app"
                 year="2026"
@@ -406,7 +406,7 @@ export default function Home() {
                   { value: 'Days -> Minutes', label: 'planning time reduced' },
                   { value: 'Auto', label: 'constraint-based seat allocation' },
                 ]}
-                stack={['React', 'Node.js', 'MongoDB', 'Scheduling Logic']}
+                stack={['React', 'Node.js', 'MongoDB', 'Constraint Scheduling']}
                 description="An automated seating arrangement system that handles complex scheduling constraints for exams. Reduced planning time from days to minutes using constraint-based algorithms — eliminating the manual effort typically involved in organizing large-scale exam halls."
                 year="2024"
               />
@@ -420,7 +420,7 @@ export default function Home() {
                   { value: 'Quarterly', label: 'budget forecasting horizon' },
                   { value: 'ML', label: 'prediction-driven planning' },
                 ]}
-                stack={['Python', 'Random Forest', 'Forecasting', 'Financial Data']}
+                stack={['Python', 'Random Forest', 'Time-Series Forecasting', 'Budget Analytics']}
                 description="A machine learning-powered financial tool that forecasts an organisation's budget for the next quarter. Built around a Random Forest model, it analyzes historical financial data to deliver accurate, data-driven budget predictions — helping organisations plan smarter and reduce financial uncertainty."
                 link="https://github.com"
                 year="2025"
@@ -436,7 +436,7 @@ export default function Home() {
                   { value: 'WebRTC', label: 'video calling engine' },
                   { value: 'Realtime', label: 'canvas and game sync' },
                 ]}
-                stack={['Socket.io', 'WebRTC', 'E2E Encryption', 'Realtime UX']}
+                stack={['Socket.io', 'WebRTC', 'End-to-End Encryption', 'Shared Canvas Sync']}
                 description="A secure platform with End-to-End Encryption, WebRTC video calling, a shared canvas, and multiplayer mini-games — all synced in real time via Socket.io."
                 imageSrc={portfolioAssets.projects.bigChat}
                 link="https://bigchat-frontend.vercel.app"
