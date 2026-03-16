@@ -169,10 +169,11 @@ export default function ProjectCard({
           }}>
             {impact && (
               <div style={{
-                border: '1px solid var(--border)',
+                border: '1px solid color-mix(in srgb, var(--accent) 18%, var(--border))',
                 borderRadius: '12px',
                 padding: '1rem 1.1rem',
-                background: 'rgba(255,255,255,0.75)',
+                background: 'var(--surface)',
+                boxShadow: 'inset 0 1px 0 color-mix(in srgb, var(--surface-strong) 70%, white)',
               }}>
                 <p style={{
                   fontSize: '0.6rem',
@@ -189,6 +190,7 @@ export default function ProjectCard({
                   fontSize: '0.95rem',
                   lineHeight: 1.6,
                   color: 'var(--fg2)',
+                  fontWeight: 500,
                 }}>
                   {impact}
                 </p>
@@ -197,10 +199,11 @@ export default function ProjectCard({
 
             {metrics.length > 0 && (
               <div style={{
-                border: '1px solid var(--border)',
+                border: '1px solid color-mix(in srgb, var(--accent) 18%, var(--border))',
                 borderRadius: '12px',
                 padding: '1rem 1.1rem',
-                background: 'rgba(255,255,255,0.75)',
+                background: 'var(--surface)',
+                boxShadow: 'inset 0 1px 0 color-mix(in srgb, var(--surface-strong) 70%, white)',
               }}>
                 <p style={{
                   fontSize: '0.6rem',
@@ -215,9 +218,9 @@ export default function ProjectCard({
                 </p>
                 <div style={{ display: 'grid', gap: '0.7rem' }}>
                   {metrics.map((metric) => (
-                    <div key={`${metric.label}-${metric.value}`} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-                      <span style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--fg)' }}>{metric.value}</span>
-                      <span style={{ fontSize: '0.82rem', color: 'var(--fg3)', textAlign: 'right' }}>{metric.label}</span>
+                    <div key={`${metric.label}-${metric.value}`} style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+                      <span style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--fg)' }}>{metric.value}</span>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--fg2)', textAlign: 'right', maxWidth: '150px' }}>{metric.label}</span>
                     </div>
                   ))}
                 </div>
