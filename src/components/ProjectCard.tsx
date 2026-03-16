@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -19,6 +20,7 @@ export default function ProjectCard({ title, category, description, imageSrc, li
 
   const images = imageSrc ? (Array.isArray(imageSrc) ? imageSrc : [imageSrc]) : [];
   const hasImages = images.length > 0;
+  const activeImage = hasImages ? images[currentImgIndex] : null;
 
   // Auto cycle images if there are multiple
   useEffect(() => {
@@ -70,29 +72,35 @@ export default function ProjectCard({ title, category, description, imageSrc, li
           position: 'relative',
         }} 
       >
-        {images.map((src, index) => (
-          <motion.img 
-            key={src}
-            src={src} 
-            alt={`${title} - image ${index + 1}`} 
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: currentImgIndex === index ? 1 : 0,
-              scale: isHovered ? 1.05 : 1
+        {activeImage && (
+          <motion.div
+            key={activeImage}
+            initial={{ opacity: 0.2 }}
+            animate={{
+              opacity: 1,
+              scale: isHovered ? 1.05 : 1,
             }}
-            transition={{ 
-              opacity: { duration: 1 }, // Smooth crossfade
-              scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+            transition={{
+              opacity: { duration: 0.45 },
+              scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
             }}
-            style={{ 
-              position: 'absolute', 
-              top: 0, left: 0, 
-              width: '100%', height: '100%', 
-              objectFit: 'cover', 
-              display: 'block' 
+            style={{
+              position: "absolute",
+              inset: 0,
             }}
-          />
-        ))}
+          >
+            <Image
+              src={activeImage}
+              alt={`${title} preview ${currentImgIndex + 1}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              style={{
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
+          </motion.div>
+        )}
         
         {/* Subtle hover overlay */}
         <motion.div
@@ -105,7 +113,7 @@ export default function ProjectCard({ title, category, description, imageSrc, li
       
       <div style={{ display: 'flex', flexDirection: 'column', paddingTop: hasImages ? '1.5rem' : '0' }}>
         <p style={{ 
-          fontFamily: "'DM Mono', monospace", 
+          fontFamily: "var(--font-mono)", 
           fontSize: '0.65rem', 
           fontWeight: 600,
           letterSpacing: '0.15em', 
@@ -122,7 +130,7 @@ export default function ProjectCard({ title, category, description, imageSrc, li
           fontWeight: 800, 
           lineHeight: 1.1, 
           color: 'var(--fg)',
-          fontFamily: "'Outfit', sans-serif",
+          fontFamily: "var(--font-sans)",
           letterSpacing: '-0.03em'
         }}>
           {title}
@@ -153,7 +161,7 @@ export default function ProjectCard({ title, category, description, imageSrc, li
              fontSize: '0.65rem', 
              fontWeight: 600,
              color: 'var(--fg3)',
-             fontFamily: "'DM Mono', monospace"
+             fontFamily: "var(--font-mono)"
            }}>
              {category}
            </span>

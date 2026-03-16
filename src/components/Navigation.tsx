@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const NAV_LINKS = [
@@ -30,15 +31,13 @@ export default function Navigation() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap');
-
         .nav-link {
           position: relative;
           font-size: 0.68rem;
           font-weight: 500;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           color: rgba(15,23,42,0.45);
           text-decoration: none;
           transition: color 0.25s;
@@ -63,7 +62,7 @@ export default function Navigation() {
           font-weight: 600;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           color: #fff;
           background: #2563eb;
           border: 1.5px solid #2563eb;
@@ -91,7 +90,7 @@ export default function Navigation() {
           font-weight: 500;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           color: rgba(15,23,42,0.5);
           text-decoration: none;
           display: flex;
@@ -105,7 +104,7 @@ export default function Navigation() {
         .mobile-nav-link-num {
           font-size: 0.52rem;
           color: rgba(37,99,235,0.6);
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           letter-spacing: 0.1em;
         }
 
@@ -153,20 +152,23 @@ export default function Navigation() {
               borderRadius: "6px",
               display: "flex", alignItems: "center", justifyContent: "center",
               background: "rgba(37,99,235,0.05)",
+              position: "relative",
               flexShrink: 0,
               overflow: "hidden", // added to contain the image
             }}>
-              <img 
-                src="/logo.svg" 
-                alt="Jophin Babu Logo" 
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} 
+              <Image
+                src="/logo.svg"
+                alt="Jophin Babu Logo"
+                fill
+                sizes="32px"
+                style={{ objectFit: "cover" }}
               />
             </div>
             <span style={{
               fontSize: "0.72rem", fontWeight: 600,
               letterSpacing: "0.06em",
               color: "rgba(15,23,42,0.6)",
-              fontFamily: "'Outfit', sans-serif",
+              fontFamily: "var(--font-sans)",
               display: "none",
             }}>
               {/* Hidden on small, shown via CSS if needed */}
@@ -271,7 +273,7 @@ export default function Navigation() {
                 fontSize: "0.55rem", fontWeight: 600,
                 letterSpacing: "0.28em", textTransform: "uppercase",
                 color: "rgba(37,99,235,0.55)",
-                fontFamily: "'DM Mono', monospace",
+                fontFamily: "var(--font-mono)",
               }}>
                 Navigation
               </span>
@@ -320,7 +322,7 @@ export default function Navigation() {
                     letterSpacing: "0.18em", textTransform: "uppercase",
                     color: "rgba(15,23,42,0.45)",
                     textDecoration: "none",
-                    fontFamily: "'DM Mono', monospace",
+                    fontFamily: "var(--font-mono)",
                     transition: "color 0.2s",
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(15,23,42,0.95)")}

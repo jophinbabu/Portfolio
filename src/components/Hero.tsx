@@ -258,8 +258,6 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
         :root {
           --bg:      #ffffff;
           --border:  rgba(15,23,42,0.08);
@@ -273,7 +271,7 @@ export default function Hero() {
         body {
           background: var(--bg);
           color: var(--fg);
-          font-family: 'Outfit', sans-serif;
+          font-family: var(--font-sans);
           -webkit-font-smoothing: antialiased;
           overflow-x: hidden;
         }
@@ -284,7 +282,7 @@ export default function Hero() {
           padding: 0.82rem 2.1rem;
           font-size: 0.7rem; font-weight: 600;
           letter-spacing: 0.16em; text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           color: #fff; background: var(--accent);
           border: 1.5px solid var(--accent); border-radius: 4px;
           text-decoration: none; cursor: pointer;
@@ -299,7 +297,7 @@ export default function Hero() {
           padding: 0.82rem 2.1rem;
           font-size: 0.7rem; font-weight: 600;
           letter-spacing: 0.16em; text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           color: var(--fg2); background: transparent;
           border: 1.5px solid var(--border); border-radius: 4px;
           text-decoration: none; cursor: pointer;
@@ -326,7 +324,7 @@ export default function Hero() {
           text-decoration: none;
           font-size: 0.62rem; font-weight: 500;
           letter-spacing: 0.18em; text-transform: uppercase;
-          font-family: 'DM Mono', monospace;
+          font-family: var(--font-mono);
           display: flex; align-items: center; gap: 0.5rem;
           transition: color 0.25s;
         }
