@@ -1,22 +1,22 @@
 :root {
-  --background: #ffffff; /* Pure white */
-  --foreground: #0f172a; /* Slate 900 */
+  --background: #ffffff;
+  --foreground: #0f172a;
   --fg: #0f172a;
   --fg2: rgba(15, 23, 42, 0.74);
   --fg3: rgba(15, 23, 42, 0.56);
-  --accent: #2563eb; /* Sapphire blue */
+  --accent: #2563eb;
   --accent-strong: #1d4ed8;
   --border: rgba(15, 23, 42, 0.1);
-  --section-dark-bg: #f8fafc; /* Slate 50 */
-  --section-dark-fg: #0f172a; /* Slate 900 */
-  --card-bg: #f1f5f9; /* Slate 100 */
+  --section-dark-bg: #f8fafc;
+  --section-dark-fg: #0f172a;
+  --card-bg: #f1f5f9;
   --glow-color: #2563eb;
   --surface: rgba(255, 255, 255, 0.78);
   --surface-strong: rgba(255, 255, 255, 0.9);
   --surface-soft: #f8fafc;
   --shadow-soft: 0 24px 60px rgba(15, 23, 42, 0.08);
-  --font-sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "Consolas", "SFMono-Regular", "Liberation Mono", monospace;
+  --font-sans: var(--font-outfit), "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), "Consolas", "SFMono-Regular", "Liberation Mono", monospace;
 }
 
 html[data-theme="dark"] {
@@ -55,37 +55,41 @@ html, body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Subtle Film Grain / Noise Overlay */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Static film grain — no animation, no full-viewport repaint */
 body::after {
   content: "";
   position: fixed;
-  inset: -50%;
-  width: 200vw;
-  height: 200vh;
+  inset: 0;
   z-index: 9999;
   pointer-events: none;
   background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-  opacity: 0.035;
-  /* Animate noise slightly so it feels like real film grain */
-  animation: noise-move 0.2s infinite steps(2);
+  opacity: 0.025;
+  mix-blend-mode: multiply;
 }
 
 html[data-theme="dark"] body::after {
   opacity: 0.02;
+  mix-blend-mode: screen;
 }
 
-@keyframes noise-move {
-  0% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -5%); }
-  20% { transform: translate(-10%, 5%); }
-  30% { transform: translate(5%, -10%); }
-  40% { transform: translate(-5%, 15%); }
-  50% { transform: translate(-10%, 5%); }
-  60% { transform: translate(15%, 0); }
-  70% { transform: translate(0, 15%); }
-  80% { transform: translate(3%, 3%); }
-  90% { transform: translate(-10%, 10%); }
-  100% { transform: translate(0, 0); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  body::after { display: none; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 a {
@@ -98,7 +102,7 @@ a {
 h1 {
   font-size: clamp(4rem, 12vw, 12rem);
   line-height: 0.85;
-  font-weight: 800; /* Bold heading */
+  font-weight: 800;
   letter-spacing: -0.04em;
 }
 
@@ -235,7 +239,6 @@ section {
   isolation: isolate;
 }
 
-/* Rotating gradient border */
 .glow-card__border {
   position: absolute;
   inset: 0;
@@ -249,25 +252,24 @@ section {
     var(--glow-color) 75%,
     transparent 100%
   );
-  -webkit-mask: 
+  -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
-  mask: 
+  mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  opacity: 0.85; /* always glowing */
+  opacity: 0.85;
   transition: opacity 0.4s ease;
   animation: glow-rotate 4s linear infinite;
   z-index: 1;
 }
 
 .glow-card--active .glow-card__border {
-  opacity: 1; /* full glow on active */
+  opacity: 1;
 }
 
-/* Inner spotlight glow that follows cursor */
 .glow-card__spotlight {
   position: absolute;
   inset: 0;
@@ -277,7 +279,7 @@ section {
     color-mix(in srgb, var(--glow-color) 40%, transparent) 0%,
     transparent 65%
   );
-  opacity: 0.15; /* subtle inner glow always */
+  opacity: 0.15;
   transition: opacity 0.4s ease;
   z-index: 1;
   pointer-events: none;
@@ -287,7 +289,6 @@ section {
   opacity: 1;
 }
 
-/* Card content */
 .glow-card__content {
   position: relative;
   z-index: 2;
@@ -306,7 +307,7 @@ section {
 
 .glow-card--active .glow-card__content {
   border-color: color-mix(in srgb, var(--glow-color) 60%, transparent);
-  box-shadow: 
+  box-shadow:
     0 0 40px color-mix(in srgb, var(--glow-color) 20%, transparent),
     0 15px 35px rgba(15, 23, 42, 0.08);
   transform: translateZ(32px);

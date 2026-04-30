@@ -33,7 +33,6 @@ export default function ProjectCard({
 
   const images = imageSrc ? (Array.isArray(imageSrc) ? imageSrc : [imageSrc]) : [];
   const hasImages = images.length > 0;
-  const activeImage = hasImages ? images[currentImgIndex] : null;
 
   // Auto cycle images if there are multiple
   useEffect(() => {
@@ -74,54 +73,84 @@ export default function ProjectCard({
       onMouseLeave={() => setIsHovered(false)}
     >
       {hasImages && (
-        <div 
-        style={{ 
-          width: '100%', 
-          height: '60vh', 
-          minHeight: '400px', 
-          borderRadius: '12px', 
-          overflow: 'hidden', 
-          backgroundColor: '#e2e8f0', 
-          position: 'relative',
-        }} 
-      >
-        {activeImage && (
-          <motion.div
-            key={activeImage}
-            initial={{ opacity: 0.2 }}
-            animate={{
-              opacity: 1,
-              scale: isHovered ? 1.05 : 1,
-            }}
-            transition={{
-              opacity: { duration: 0.45 },
-              scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-            }}
-            style={{
-              position: "absolute",
-              inset: 0,
-            }}
-          >
-            <Image
-              src={activeImage}
-              alt={`${title} preview ${currentImgIndex + 1}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              style={{
-                objectFit: "cover",
-                display: "block",
+        <div
+          style={{
+            width: '100%',
+            aspectRatio: '4 / 3',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            backgroundColor: '#f1f5f9',
+            position: 'relative',
+          }}
+        >
+          {images.map((src, index) => (
+            <motion.div
+              key={src}
+              initial={false}
+              animate={{
+                opacity: currentImgIndex === index ? 1 : 0,
+                scale: isHovered && currentImgIndex === index ? 1.04 : 1,
               }}
-            />
-          </motion.div>
-        )}
-        
-        {/* Subtle hover overlay */}
-        <motion.div
-           initial={{ opacity: 0 }}
-           animate={{ opacity: isHovered ? 0.2 : 0 }}
-           style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--accent)', pointerEvents: 'none' }}
-        />
-      </div>
+              transition={{
+                opacity: { duration: 0.9 },
+                scale: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+              }}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: currentImgIndex === index ? 'auto' : 'none',
+              }}
+            >
+              <Image
+                src={src}
+                alt={`${title} — image ${index + 1}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                style={{ objectFit: 'cover' }}
+                quality={85}
+                priority={index === 0}
+              />
+            </motion.div>
+          ))}
+
+          {images.length > 1 && (
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '1rem',
+                left: '1rem',
+                display: 'flex',
+                gap: '0.4rem',
+                zIndex: 2,
+              }}
+            >
+              {images.map((_, i) => (
+                <span
+                  key={i}
+                  style={{
+                    width: i === currentImgIndex ? '20px' : '6px',
+                    height: '3px',
+                    borderRadius: '2px',
+                    background: i === currentImgIndex ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.45)',
+                    transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+          {/* Subtle hover gradient overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, transparent 60%, rgba(37,99,235,0.18) 100%)',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
       )}
       
       <div style={{ display: 'flex', flexDirection: 'column', paddingTop: hasImages ? '1.5rem' : '0' }}>

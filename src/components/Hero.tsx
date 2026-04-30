@@ -8,6 +8,7 @@ import {
   useMotionValue,
   useSpring,
 } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 import { portfolioAssets } from "@/lib/portfolioAssets";
 
@@ -255,7 +256,7 @@ function ResumePreviewCard() {
 /* ─────────────────────────────────────────────
    HERO GEOMETRY (CIRCLES)
 ───────────────────────────────────────────── */
-function HeroGeometry({ x, y }: { x: any; y: any }) {
+function HeroGeometry({ x, y }: { x: MotionValue<number>; y: MotionValue<number> }) {
   const rotate1 = useTransform(x, [0, 1], [-20, 20]);
   const rotate2 = useTransform(y, [0, 1], [20, -20]);
   const rotate3 = useTransform(x, [0, 1], [-40, 40]);
@@ -358,7 +359,6 @@ export default function Hero() {
   const yParallax = useTransform(scrollY, [0, 600], [0, 110]);
   const fadeOut = useTransform(scrollY, [0, 420], [1, 0]);
   const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [roleIdx, setRoleIdx] = useState(0);
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -367,9 +367,6 @@ export default function Hero() {
 
   useEffect(() => {
     const iv = setInterval(() => setRoleIdx((p) => (p + 1) % ROLES.length), 3400);
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
     return () => clearInterval(iv);
   }, []);
 
@@ -394,15 +391,6 @@ export default function Hero() {
   return (
     <>
       <style>{`
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-          background: var(--background);
-          color: var(--foreground);
-          font-family: var(--font-sans);
-          -webkit-font-smoothing: antialiased;
-          overflow-x: hidden;
-        }
-
         /* ── CTA buttons ── */
         .btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
@@ -494,27 +482,18 @@ export default function Hero() {
         }}
       >
 
-        {/* ─ Background Video ─ */}
-        <video
-          ref={videoRef}
-          autoPlay
-          loop
-          muted
-          playsInline
+        {/* ─ Background gradient wash ─ */}
+        <div
+          aria-hidden
           style={{
             position: "absolute",
             inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.12,
+            background:
+              "radial-gradient(ellipse at 30% 20%, rgba(37,99,235,0.06) 0%, transparent 55%), radial-gradient(ellipse at 70% 80%, rgba(59,130,246,0.05) 0%, transparent 55%)",
             zIndex: 0,
             pointerEvents: "none",
-            filter: "grayscale(100%)",
           }}
-        >
-          <source src={portfolioAssets.heroVideo} type="video/mp4" />
-        </video>
+        />
 
         {/* ─ Grid columns ─ */}
         {[16.66, 33.33, 50, 66.66, 83.33].map((p, i) => (
@@ -673,7 +652,7 @@ export default function Hero() {
           {/* ── Name block ── */}
           <div style={{ textAlign: "center", position: "relative" }}>
             {/* ── Geometry ── */}
-            <HeroGeometry x={mx} y={my} />
+            <HeroGeometry x={x} y={y} />
 
             {/* FIRST */}
             <div style={{

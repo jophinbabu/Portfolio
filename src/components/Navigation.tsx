@@ -30,7 +30,8 @@ export default function Navigation() {
           : "light";
 
     root.dataset.theme = nextTheme;
-    setTheme(nextTheme);
+    const frame = window.requestAnimationFrame(() => setTheme(nextTheme));
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   const toggleTheme = () => {
@@ -202,9 +203,10 @@ export default function Navigation() {
               <Image
                 src="/logo.svg"
                 alt="Jophin Babu Logo"
-                fill
-                sizes="32px"
-                style={{ objectFit: "cover" }}
+                width={32}
+                height={32}
+                priority
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </div>
             <span style={{
@@ -256,7 +258,7 @@ export default function Navigation() {
 
           {/* CTA — desktop */}
           <Link href="#contact" className="nav-cta desktop-cta">
-            Let's Talk
+            Let&apos;s Talk
           </Link>
 
           {/* Hamburger — mobile */}
