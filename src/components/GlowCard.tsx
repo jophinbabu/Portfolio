@@ -13,7 +13,7 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
   const animFrameRef = useRef<number>(0);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50, rotateX: 0, rotateY: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [floatDelay, setFloatDelay] = useState(0);
+  const [floatDelay] = useState(() => Math.random() * -6);
   const [glowPhase, setGlowPhase] = useState(0);
 
   // Autonomous animation loop — only runs on desktop for performance
@@ -55,10 +55,6 @@ export default function GlowCard({ children, accentColor, className = "" }: Glow
       rotateX: ((e.clientY - rect.top - cy) / cy) * -8,
       rotateY: ((e.clientX - rect.left - cx) / cx) * 8,
     });
-  }, []);
-
-  useEffect(() => {
-    setFloatDelay(Math.random() * -6);
   }, []);
 
   return (

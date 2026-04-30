@@ -6,15 +6,122 @@ import AnimateInView from "@/components/AnimateInView";
 import ScrollRevealText from "@/components/ScrollRevealText";
 import GlowCard from "@/components/GlowCard";
 import { portfolioAssets } from "@/lib/portfolioAssets";
-import { motion } from "framer-motion";
 
 export default function Home() {
   return (
     <main>
+      <style jsx global>{`
+        .portfolio-section {
+          background:
+            linear-gradient(180deg, var(--background), color-mix(in srgb, var(--surface-soft) 55%, var(--background))),
+            var(--background);
+        }
+
+        .section-heading-row {
+          align-items: center;
+        }
+
+        .projects-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8rem;
+        }
+
+        .intro-reveal-text {
+          font-size: clamp(2.2rem, 5vw, 4.5rem);
+          font-weight: 800;
+          line-height: 1.15;
+          letter-spacing: -0.03em;
+          margin-bottom: 0;
+          max-width: 1200px;
+          color: var(--fg);
+        }
+
+        .intro-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6rem;
+          margin-top: 6rem;
+          align-items: start;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+          padding-top: 0.5rem;
+        }
+
+        .intro-panel {
+          border: 1px solid var(--border);
+          border-left: 3px solid var(--accent);
+          border-radius: 0 22px 22px 0;
+          padding: 2rem 2rem 2rem 2.2rem;
+          background:
+            linear-gradient(135deg, color-mix(in srgb, var(--surface) 85%, transparent), transparent 75%),
+            var(--surface);
+          box-shadow: var(--shadow-soft);
+        }
+
+        .intro-stat-card {
+          border: 1px solid var(--border);
+          border-radius: 18px;
+          padding: 1.4rem 1.35rem;
+          background:
+            linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 88%, transparent), var(--surface));
+          box-shadow: var(--shadow-soft);
+        }
+
+        @media (max-width: 1024px) {
+          .intro-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+          }
+          .intro-panel {
+            border-radius: 0 18px 18px 0;
+            padding: 1.5rem 1.35rem 1.5rem 1.6rem;
+          }
+          .stats-grid {
+            gap: 1rem;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .portfolio-section {
+            padding: 5.25rem 0 !important;
+          }
+          .section-heading-row {
+            margin-bottom: 2.5rem !important;
+            gap: 1rem !important;
+          }
+          .intro-reveal-text {
+            font-size: clamp(2rem, 11vw, 3.25rem) !important;
+            line-height: 1.05 !important;
+          }
+          .intro-grid {
+            margin-top: 3rem !important;
+            gap: 2rem !important;
+          }
+          .stats-grid {
+            grid-template-columns: 1fr !important;
+            gap: 0.8rem !important;
+          }
+          .intro-stat-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+          }
+          .projects-list {
+            gap: 2.4rem !important;
+          }
+        }
+      `}</style>
       <Hero />
       
       {/* ─── INTRO SECTION ─── */}
-      <section id="about" style={{ padding: '10rem 0 8rem', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
+      <section id="about" className="portfolio-section" style={{ padding: '10rem 0 8rem', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
         {/* ─ Dot Grid Pattern ─ */}
         <div
           style={{
@@ -71,9 +178,9 @@ export default function Home() {
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           {/* Section label row */}
           <AnimateInView yOffset={20}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '4rem' }}>
+            <div className="section-heading-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '4rem' }}>
               <p className="section-label" style={{ margin: 0, color: 'var(--fg3)', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
-                <span style={{ color: 'var(--accent)' }}>//</span> Intro
+                <span style={{ color: 'var(--accent)' }}>{"//"}</span> Intro
               </p>
               <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
             </div>
@@ -84,63 +191,6 @@ export default function Home() {
             text="I partner with founders to turn ideas into real products. I focus on clear interfaces, sharp decisions, and fast execution."
             className="intro-reveal-text"
           />
-          <style jsx>{`
-            .intro-reveal-text {
-              font-size: clamp(2.2rem, 5vw, 4.5rem);
-              font-weight: 800;
-              line-height: 1.15;
-              letter-spacing: -0.03em;
-              margin-bottom: 0;
-              max-width: 1200px;
-              color: var(--fg);
-            }
-            .intro-grid {
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 6rem;
-              margin-top: 6rem;
-              align-items: start;
-            }
-            .stats-grid {
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-              gap: 3rem;
-              padding-top: 0.5rem;
-            }
-            .intro-panel {
-              border: 1px solid var(--border);
-              border-left: 3px solid var(--accent);
-              border-radius: 0 22px 22px 0;
-              padding: 2rem 2rem 2rem 2.2rem;
-              background:
-                linear-gradient(135deg, color-mix(in srgb, var(--surface) 85%, transparent), transparent 75%),
-                var(--surface);
-              box-shadow: var(--shadow-soft);
-            }
-            .intro-stat-card {
-              border: 1px solid var(--border);
-              border-radius: 18px;
-              padding: 1.4rem 1.35rem;
-              background:
-                linear-gradient(180deg, color-mix(in srgb, var(--surface-strong) 88%, transparent), var(--surface));
-              box-shadow: var(--shadow-soft);
-            }
-            @media (max-width: 1024px) {
-              .intro-grid {
-                grid-template-columns: 1fr;
-                gap: 4rem;
-                margin-top: 4rem;
-              }
-              .intro-panel {
-                border-radius: 0 18px 18px 0;
-                padding: 1.5rem 1.35rem 1.5rem 1.6rem;
-              }
-              .stats-grid {
-                gap: 1rem;
-              }
-            }
-          `}</style>
-
           {/* Two-column detail area */}
           <div className="intro-grid">
             {/* Left column — description with accent border */}
@@ -198,7 +248,7 @@ export default function Home() {
       </section>
 
       {/* ─── EXPERTISE SECTION ─── */}
-      <section style={{ padding: '8rem 0', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
+      <section className="portfolio-section" style={{ padding: '8rem 0', backgroundColor: 'var(--background)', position: 'relative', overflow: 'hidden' }}>
         {/* ─ Dot Grid Pattern ─ */}
         <div
           style={{
@@ -227,9 +277,9 @@ export default function Home() {
 
         <div className="container" style={{ position: 'relative', zIndex: 10 }}>
           <AnimateInView yOffset={20}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '5rem' }}>
+            <div className="section-heading-row" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '5rem' }}>
               <p className="section-label" style={{ margin: 0, color: 'var(--fg3)', fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
-                <span style={{ color: 'var(--accent)' }}>//</span> Expertise
+                <span style={{ color: 'var(--accent)' }}>{"//"}</span> Expertise
               </p>
               <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
             </div>
@@ -310,7 +360,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" style={{ 
+      <section id="projects" className="portfolio-section" style={{ 
         backgroundColor: 'var(--background)', 
         color: 'var(--fg)', 
         padding: '10rem 0',
@@ -371,11 +421,11 @@ export default function Home() {
                alignItems: 'center',
                gap: '0.75rem'
              }}>
-               <span style={{ color: 'var(--accent)' }}>//</span> Projects
+               <span style={{ color: 'var(--accent)' }}>{"//"}</span> Projects
              </p>
           </AnimateInView>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem' }}>
+          <div className="projects-list">
             <AnimateInView yOffset={60}>
               <ProjectCard 
                 title="BloodLink"

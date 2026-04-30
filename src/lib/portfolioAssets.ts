@@ -3,13 +3,12 @@ const bucketName =
   process.env.NEXT_PUBLIC_SUPABASE_BUCKET || "portfolio-assets";
 
 function buildPublicUrl(path: string) {
+  const cleanPath = path.replace(/^\/+/, "");
+
   if (!supabaseUrl) {
-    throw new Error(
-      "NEXT_PUBLIC_SUPABASE_URL is required to render portfolio assets from Supabase."
-    );
+    return `/${cleanPath.split("/").at(-1)}`;
   }
 
-  const cleanPath = path.replace(/^\/+/, "");
   return `${supabaseUrl}/storage/v1/object/public/${bucketName}/${cleanPath}`;
 }
 

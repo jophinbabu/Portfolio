@@ -237,7 +237,7 @@ export default function Footer() {
             <div className="contact-side contact-side--left">
               <AnimateInView yOffset={24}>
                 <p className="contact-kicker">
-                  <span style={{ color: "var(--accent)" }}>//</span> Contact
+                  <span style={{ color: "var(--accent)" }}>{"//"}</span> Contact
                 </p>
                 <h2
                   style={{

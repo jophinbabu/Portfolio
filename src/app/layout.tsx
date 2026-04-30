@@ -21,7 +21,7 @@ const dmMono = DM_Mono({
 export const metadata = {
   title: "Jophin Babu | Full-Stack & AI Developer",
   description:
-    "Portfolio of Jophin Babu — Full-Stack Developer and AI/ML Engineer building real products: web apps, computer vision pipelines, and quantitative trading systems.",
+    "Portfolio of Jophin Babu - Full-Stack Developer and AI/ML Engineer building real products: web apps, computer vision pipelines, and quantitative trading systems.",
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",

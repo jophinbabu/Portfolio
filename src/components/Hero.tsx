@@ -9,6 +9,8 @@ import {
   useSpring,
 } from "framer-motion";
 import type { MotionValue } from "framer-motion";
+import Image from "next/image";
+import { ArrowRight, Download, Mail } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { portfolioAssets } from "@/lib/portfolioAssets";
 
@@ -77,6 +79,7 @@ function Ticker() {
   const doubled = [...TICKER_ITEMS, ...TICKER_ITEMS];
   return (
     <div
+      className="hero-ticker"
       style={{
         position: "absolute",
         bottom: "4.8rem",
@@ -120,6 +123,7 @@ function Ticker() {
 function ResumePreviewCard() {
   return (
     <div
+      className="resume-preview-card"
       style={{
         width: "min(320px, 90vw)",
         borderRadius: "16px",
@@ -130,6 +134,63 @@ function ResumePreviewCard() {
         overflow: "hidden",
       }}
     >
+      <div
+        style={{
+          position: "relative",
+          height: "150px",
+          background:
+            "linear-gradient(135deg, rgba(37,99,235,0.18), rgba(16,185,129,0.12))",
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          src="/profile.jpg"
+          alt="Jophin Babu"
+          fill
+          sizes="320px"
+          style={{ objectFit: "cover", objectPosition: "center 24%" }}
+          priority
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, transparent 15%, color-mix(in srgb, var(--background) 84%, transparent) 100%)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: "1rem",
+            bottom: "1rem",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.45rem",
+            padding: "0.42rem 0.65rem",
+            borderRadius: "999px",
+            background: "rgba(255,255,255,0.88)",
+            color: "#0f172a",
+            fontSize: "0.64rem",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            fontFamily: "var(--font-mono)",
+            boxShadow: "0 12px 30px rgba(15,23,42,0.14)",
+          }}
+        >
+          <span
+            style={{
+              width: "7px",
+              height: "7px",
+              borderRadius: "999px",
+              background: "#22c55e",
+              boxShadow: "0 0 0 5px rgba(34,197,94,0.16)",
+            }}
+          />
+          Available
+        </div>
+      </div>
       <div
         style={{
           display: "flex",
@@ -391,6 +452,46 @@ export default function Hero() {
   return (
     <>
       <style>{`
+        .hero-section {
+          min-height: 100svh;
+          padding: 6.8rem 0 7.4rem;
+        }
+
+        .hero-main {
+          max-width: 1320px;
+          margin: 0 auto;
+        }
+
+        .hero-name-letter {
+          text-shadow: 0 22px 70px rgba(37,99,235,0.16);
+        }
+
+        .hero-stats {
+          box-shadow:
+            0 20px 50px rgba(15,23,42,0.08),
+            inset 0 1px 0 rgba(255,255,255,0.55);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+        }
+
+        .hero-actions {
+          max-width: min(100%, 680px);
+        }
+
+        .hero-bottom-bar {
+          box-shadow: 0 -16px 60px rgba(15,23,42,0.06);
+        }
+
+        .resume-preview-card {
+          transform: translateZ(0);
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .resume-preview-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 34px 90px rgba(15,23,42,0.14) !important;
+        }
+
         /* ── CTA buttons ── */
         .btn-primary {
           display: inline-flex; align-items: center; gap: 0.55rem;
@@ -424,6 +525,51 @@ export default function Hero() {
         }
 
         @media (max-width: 640px) {
+          .hero-section {
+            min-height: auto;
+            padding: 6.25rem 0 3.5rem;
+          }
+          .hero-main {
+            padding-inline: 1.15rem !important;
+          }
+          .hero-name-letter {
+            font-size: clamp(2.7rem, 18vw, 5.8rem) !important;
+            letter-spacing: -0.045em !important;
+          }
+          .hero-role-lines {
+            width: 20px !important;
+          }
+          .hero-role-text {
+            min-width: 0 !important;
+            max-width: 68vw;
+          }
+          .hero-stats {
+            width: 100%;
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
+          .hero-stat-cell {
+            padding: 0.78rem 0.42rem !important;
+          }
+          .hero-stat-label {
+            font-size: 0.48rem !important;
+            letter-spacing: 0.11em !important;
+            text-align: center;
+          }
+          .hero-actions {
+            width: 100%;
+            display: grid !important;
+            grid-template-columns: 1fr;
+          }
+          .resume-preview-card {
+            width: 100% !important;
+            max-width: 360px;
+          }
+          .hero-ticker,
+          .hero-bottom-bar,
+          .hero-top-meta {
+            display: none !important;
+          }
           .btn-primary, .btn-ghost {
             width: 100%;
             justify-content: center;
@@ -463,8 +609,8 @@ export default function Hero() {
 
       <section
         ref={sectionRef}
+        className="hero-section"
         style={{
-          minHeight: "100vh",
           position: "relative",
           overflow: "hidden",
           display: "flex",
@@ -558,6 +704,7 @@ export default function Hero() {
 
         {/* ─ Top-left wordmark ─ */}
         <motion.div
+          className="hero-top-meta"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.7 }}
@@ -580,6 +727,7 @@ export default function Hero() {
 
         {/* ─ Top-right metadata ─ */}
         <motion.div
+          className="hero-top-meta"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.8, duration: 0.8 }}
@@ -634,6 +782,7 @@ export default function Hero() {
 
         {/* ══ MAIN CONTENT ══ */}
         <motion.div
+          className="hero-main"
           style={{
             y: yParallax,
             opacity: fadeOut,
@@ -662,6 +811,7 @@ export default function Hero() {
               {FIRST.map((l, i) => (
                 <motion.span
                   key={i}
+                  className="hero-name-letter"
                   custom={i}
                   initial="hidden"
                   animate="show"
@@ -683,6 +833,7 @@ export default function Hero() {
 
             {/* Accent divider */}
             <motion.div
+              className="hero-role-lines"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 1, delay: 1.05, ease: [0.16, 1, 0.3, 1] }}
@@ -704,6 +855,7 @@ export default function Hero() {
               {LAST.map((l, i) => (
                 <motion.span
                   key={i}
+                  className="hero-name-letter"
                   custom={i + FIRST.length}
                   initial="hidden"
                   animate="show"
@@ -753,7 +905,7 @@ export default function Hero() {
               display: "flex", alignItems: "center",
               minWidth: "clamp(200px, 26vw, 320px)",
               justifyContent: "center",
-            }}>
+            }} className="hero-role-text">
               <AnimatePresence mode="wait">
                 <motion.span
                   key={roleIdx}
@@ -776,6 +928,7 @@ export default function Hero() {
               </AnimatePresence>
             </div>
             <motion.div
+              className="hero-role-lines"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ delay: 1.25, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -789,6 +942,7 @@ export default function Hero() {
 
           {/* ── Stats row ── */}
           <motion.div
+            className="hero-stats"
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.42, duration: 0.8 }}
@@ -804,6 +958,7 @@ export default function Hero() {
             {STATS.map((s, i) => (
               <div
                 key={i}
+                className="hero-stat-cell"
                 style={{
                   padding: "clamp(0.8rem, 1.5vw, 1.1rem) clamp(1.4rem, 3vw, 2.6rem)",
                   display: "flex",
@@ -827,7 +982,7 @@ export default function Hero() {
                   letterSpacing: "0.22em", textTransform: "uppercase",
                   color: "var(--fg3)",
                   fontFamily: "var(--font-mono)",
-                }}>
+                }} className="hero-stat-label">
                   {s.label}
                 </span>
               </div>
@@ -835,6 +990,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
+            className="hero-actions"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.62, duration: 0.8 }}
@@ -848,15 +1004,15 @@ export default function Hero() {
           >
             <a href={portfolioAssets.resume} download="Jophin_Babu_Resume.pdf" type="application/pdf" className="btn-primary">
               Download Resume
-              <span style={{ opacity: 0.75 }}>↓</span>
+              <Download size={14} strokeWidth={2.4} />
             </a>
             <a href="#contact" className="btn-primary" style={{ background: 'transparent', color: 'var(--accent)', borderColor: 'var(--accent)' }}>
               Contact Me
-              <span style={{ opacity: 0.75 }}>✉</span>
+              <Mail size={14} strokeWidth={2.4} />
             </a>
             <a href="#projects" className="btn-ghost">
               View Projects
-              <span style={{ opacity: 0.45 }}>→</span>
+              <ArrowRight size={14} strokeWidth={2.4} />
             </a>
           </motion.div>
 
@@ -878,6 +1034,7 @@ export default function Hero() {
 
         {/* ─ Bottom bar ─ */}
         <motion.div
+          className="hero-bottom-bar"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.9, duration: 1 }}
